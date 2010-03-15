@@ -1,0 +1,9 @@
+start ferret full text search engine
+>ferret_server.sh start
+or
+ ruby script/ferret_server --root /var/www/oe -e production start
+
+Restart web server
+./restart
+or
+mongrel_rails cluster::restart
