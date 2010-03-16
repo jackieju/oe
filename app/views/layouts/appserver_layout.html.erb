@@ -261,6 +261,40 @@ function openapp(app)
 	
 	
 }
+
+function fs() // full screen app
+{
+
+	// alert($("#app_frame").data("a"));
+	a = $("#app_frame").data("a");
+	if (a == undefined || a!= 1){
+	$("#app_frame").width(window.screen.width-20);
+	$("#app_frame").css("height", "auto");
+	$("#app_frame").attr("z-index", 100);
+	// $("#app_frame").css("border", "1px solid green");
+	$("#app_frame").css("position", "absolute");
+	$("#app_frame").css("left", "0");
+	$("#app_frame").css("top", "0");
+	 // $("#app_frame").css("opacity", 1);
+	$("#title_bt").attr("src","/images/widget_title_min_active.jpg");
+	$("#app_frame").data("a", 1);
+}else{
+		$("#app_frame").width("850px");
+	$("#app_frame").css("height", "500px");
+	$("#app_frame").attr("z-index", 10);
+	
+	$("#app_frame").css("position", "relative");
+	$("#app_frame").css("left", "0");
+	$("#app_frame").css("top", "0");
+	 // $("#app_frame").css("opacity", 1);
+	$("#title_bt").attr("src","/images/widget_title_max_active.jpg");
+	$("#app_frame").data("a", 0);
+}
+	// $("#header").css('display', 'none');
+	// $("#right").css('display', 'none');
+	// $("#footer").css('display', 'none');
+	
+}
 </script>
 
 
@@ -308,10 +342,13 @@ function openapp(app)
 </div>
 <div id="app_content" style="_height:500px;min-height:500px;border:0px solid green;">
 	<div id="app_frame" style="height:500px;position:relative;float:left;width:850px;border:0px solid red;padding:0xp;margin:0px;">
-	<iframe id="appframe" src="/editor/index" width="100%" height="100%" style="border-width:0px;padding:0xp;margin:0px;" scrolling="no" >
+		<div style="text-align:right;">
+			<a href="javascript:void(0);" onclick="fs()"><img id="title_bt" src="/images/widget_title_max_active.jpg" /></a>
+	    </div>
+		<iframe id="appframe" src="/editor/index" width="100%" height="100%" style="border-width:0px;padding:0xp;margin:0px;" scrolling="no" >
 		</iframe>
 	</div>
-	<div id="right" style="float:left;width:150px;margin-left:5px;margin-top:20px;">
+	<div id="right" style="float:left;width:150px;margin-left:5px;margin-top:20px;z-index:10px;">
 		<div style="color:#aa2222;"><a href="javascript:void(0)" onclick="play_game()"><span style="color:#992211">闷了?玩个小游戏</span></a></div>
 	</div><!-- right -->
 	<div style="clear:both"></div>
