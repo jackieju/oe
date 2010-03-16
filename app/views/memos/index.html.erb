@@ -1,0 +1,121 @@
+
+<% number=0%>
+	<div style="float:left;margin:2px;text-align:center;"><a href="javascript:void(0)" onclick="addNewMemo()"><img src='/images/create_note.gif' style="height:36px;border-width:0px;align:center;" /><br/><span>添加便签</span></a>
+	</div>
+	<div style="float:left;margin:2px;text-align:center;"><a href="javascript:void(0)" onclick="hideMemo();"  title="ctrl-F11"><img src="/images/button_block.png" style="height:36px;border-width:0px;" /><br/>隐藏便签<span style="font-size:8pt;">(F11)</span></a></div>
+	<div style="float:left">&nbsp;<span id='memo_status' style="font-size:8pt;font-weight:100;"></span></div>
+	<% for memo in @memos do%>
+	<div id="ex3c<%=number %>" class="jqmNotice jqDrag" style="position:absolute;" onclick="activate(this);return false;">
+
+
+		<div class="jqmnTitle jqDrag" style="overflow:hidden;cursor:pointer;">
+			<h1 style="font-size:6pt;overflow:hidden;"><%=memo[:updated_at].strftime('%H:%m:%S %Y-%m-%d') %></h1>
+
+		</div>
+
+		<div class="jqmnContent" style="width:auto;height:auto;overflow:hidden;" >
+			<textArea id="<%=memo[:id] %>" changed="0" class="jqmnContent" style="overflow:hidden;padding: 2px 10px;background:transparent;border-width:0px;" ><%=memo[:content]%></textArea>
+		</div>	
+
+		<img src="/images/close_icon.png" alt="delete" class="jqmClose" ></img>
+		<img src="/images/resize.gif" alt="resize" class="jqResize" ></img>
+	</div>
+	<% number = number +1%>
+	<% end %>
+
+  <div id="ex3cdummy" class="jqmNotice jqDrag" style="position:absolute;display:none" onclick="activate(this);return false;">
+
+
+        <div class="jqmnTitle jqDrag" style="overflow:hidden;cursor:pointer;">
+            <h1 style="font-size:6pt;overflow:hidden;"></h1>
+
+        </div>
+
+        <div class="jqmnContent" style="width:auto;height:auto;overflow:hidden;" >
+            <textArea id="dummy" changed="0" class="jqmnContent" style="overflow:hidden;padding: 2px 10px;background:transparent;border-width:0px;
+" ></textArea>
+        </div>
+
+        <img src="/images/close_icon.png" alt="delete" class="jqmClose" ></img>
+        <img src="/images/resize.gif" alt="resize" class="jqResize" ></img>
+    </div>
+<script>
+/*
+$('.jqmNotice').jqDrag('.jqDrag', onMemoMove);
+$('.jqmNotice').jqResize('.jqResize', onMemoMove);
+$('.jqmNotice').jqm({
+        overlay: 0,
+        onShow: function(h) {
+        //  h.w.css('opacity',0.92).slideDown();
+    		h.w.css('opacity',0.92).fadeIn();        },        
+		onHide: function(h) {
+            delMemo(h.w.find("textarea")); 
+            h.w.slideUp("slow",function() { if(h.o) h.o.remove(); });
+        }
+    });
+$('.jqmNotice').css({left:<%=memo[:pos]['left'] %>, top:<%=memo[:pos]['top'] %>, width:<%=memo[:pos]['width'] %>, height:<%=memo[:pos]['height'] %>});
+    $('.jqmNotice textarea').css({width:<%=memo[:pos]['width'].to_i-50 %>, height:<%=memo[:pos]['height'].to_i-50 %>});
+    $('.jqmNotice').jqmShow();
+    $('.jqmNotice textarea').blur(onMemoBlur);
+    $('.jqmNotice textarea').keydown(function(e){$(e.target).attr('changed', 1);});
+
+*/
+$().ready(function() {
+
+//	alert($('#ex3c').find('textarea').val()+"ddddd");
+	<% number = 0 %>
+	<% for memo in @memos do%>
+
+	$('#ex3c<%=number %>').jqDrag('.jqDrag', onMemoMove);
+
+	$('#ex3c<%=number %>').jqResize('.jqResize', onMemoMove);
+
+	//$('#ex3c').resizable({ 
+	//	alsoResize: '#text1',
+	//	minWidth:100,
+	//	minHeight:100
+	 //});
+	$('#ex3c<%=number %>').jqm({
+		//	trigger:'#ex3cTrigger',
+		overlay: 0,
+		onShow: function(h) {
+		//	h.w.css('opacity',0.92).slideDown(); 
+	h.w.css('opacity',0.92).fadeIn(); 
+		},
+		onHide: function(h) {
+			delMemo(h.w.find("textarea"));
+			h.w.slideUp("slow",function() { if(h.o) h.o.remove(); }); 
+		} 
+	});
+	$('#ex3c<%=number %>').css({left:<%=memo[:pos]['left'] %>, top:<%=memo[:pos]['top'] %>, width:<%=memo[:pos]['width'] %>, height:<%=memo[:pos]['height'] %>});
+	$('#ex3c<%=number %> textarea').css({width:<%=memo[:pos]['width'].to_i-50 %>, height:<%=memo[:pos]['height'].to_i-50 %>});
+	$('#ex3c<%=number %>').jqmShow();
+//	alert("<%=memo[:pos]['height'] %>");
+	$('#ex3c<%=number %> textarea').blur(onMemoBlur);
+	$('#ex3c<%=number %> textarea').keydown(function(e){$(e.target).attr('changed', 1);});
+	<% number = number +1%>
+	<% end %>
+
+$('#ex3cdummy').jqDrag('.jqDrag', onMemoMove);
+$('#ex3cdummy').jqResize('.jqResize', onMemoMove);
+ $('#ex3cdummy').jqm({
+		overlay:0,
+        onShow: function(h) {
+       
+    h.w.css('opacity',0.92).fadeIn();
+        },
+        onHide: function(h) {
+            delMemo(h.w.find("textarea"));
+            h.w.slideUp("slow",function() { if(h.o) h.o.remove(); });
+        }
+    });
+    $('#ex3cdummy').css({left:0, top:0, width:100, height:100});
+    $('#ex3cdummy textarea').css({width:0, height:0});
+    $('#ex3cdummy').jqmShow();
+
+    $('#ex3cdummy textarea').blur(onMemoBlur);
+    $('#ex3cdummy textarea').keydown(function(e){$(e.target).attr('changed', 1);});
+	$('#ex3cdummy').css("display", "none");
+	});
+	
+</script>

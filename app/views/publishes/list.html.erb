@@ -1,0 +1,57 @@
+文坛动态:
+
+<% if @list %>
+<div style="height:360px;">
+<% for act in @list do%>
+<div class="action">
+	<%=act[:username]%>在
+	<a href="
+	<% if act[:to]== 'CSDN'%>
+		http://www.csdn.net
+	<% else %>
+	http://<%=act[:to]%>
+	<% end %>
+	"><%=act[:to]%></a>上发布了大作
+	
+		<% 
+		if !act[:doctitle] || act[:doctitle].size == 0
+			title='[无标题]'
+		else
+			title = act[:doctitle]
+			if (title.size >30)
+				k = 21
+				for i in [22..27] do
+					k = k+1
+					if title[k].to_i>=192 && title[k].to_i<253
+						title = title[0, k]+"..."
+						break;
+					end
+						print "title["+k.to_s+"]=="+title[k].to_s
+					if title[k].to_i>=0 && title[k].to_i<128
+						title = title[0, k+1]+"..."
+						break;
+					end
+				end
+			end
+		end 
+		%>
+
+
+	<% if act[:permalink] && act[:permalink].size>0 %>
+		<a target="_blank" href="<%=act[:permalink]%>" >
+			<span style="color:#66cc66;"><%=title %><span>
+		</a>
+	<% else %>
+		<span style="color:#eeee99;"><%=title %></span>
+	<% end %>
+	<span style="font-size:8pt;font-style:italic;"><%=act[:created_at].strftime('%Y-%m-%d %H:%m:%S')%></span></div>
+<% end %>
+</div>
+<div id="pager"style="text-align:right;" ></div>
+
+<% end %>
+<script>
+
+ $("#pager").pager({ pagenumber: <%=@current_page%>, pagecount: <%=@page_number%>, buttonClickCallback: showPub });
+//$(g_fckeditor.EditorDocument).height("1000px");
+</script>

@@ -1,0 +1,26 @@
+<h1>Listing publishes</h1>
+
+<table>
+  <tr>
+    <th>Uid</th>
+    <th>Docid</th>
+    <th>Doctitle</th>
+    <th>To</th>
+  </tr>
+
+<% @publishes.each do |publish| %>
+  <tr>
+    <td><%=h publish.uid %></td>
+    <td><%=h publish.docid %></td>
+    <td><%=h publish.doctitle %></td>
+    <td><%=h publish.to %></td>
+    <td><%= link_to 'Show', publish %></td>
+    <td><%= link_to 'Edit', edit_publish_path(publish) %></td>
+    <td><%= link_to 'Destroy', publish, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New publish', new_publish_path %>

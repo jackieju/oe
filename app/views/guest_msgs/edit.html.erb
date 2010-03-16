@@ -1,0 +1,20 @@
+<h1>Editing guest_msg</h1>
+
+<% form_for(@guest_msg) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :uid %><br />
+    <%= f.text_field :uid %>
+  </p>
+  <p>
+    <%= f.label :content %><br />
+    <%= f.text_field :content %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @guest_msg %> |
+<%= link_to 'Back', guest_msgs_path %>

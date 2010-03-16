@@ -1,0 +1,48 @@
+<h1>Editing app</h1>
+
+<% form_for(@app) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :creator %><br />
+    <%= f.text_field :creator %>
+  </p>
+  <p>
+    <%= f.label :appkey %><br />
+    <%= f.text_field :appkey %>
+  </p>
+  <p>
+    <%= f.label :secret %><br />
+    <%= f.text_field :secret %>
+  </p>
+  <p>
+    <%= f.label :permission %><br />
+    <%= f.text_field :permission %>
+  </p>
+  <p>
+    <%= f.label :style %><br />
+    <%= f.text_field :style %>
+  </p>
+  <p>
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :desc %><br />
+    <%= f.text_field :desc %>
+  </p>
+  <p>
+    <%= f.label :callback %><br />
+    <%= f.text_field :callback %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @app %> |
+<%= link_to 'Back', apps_path %>

@@ -1,0 +1,33 @@
+<!--<p>
+  <b>Uid:</b>
+  <%=h @doc.uid %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%=h @doc.title %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%=h @doc.type %>
+</p>
+
+<p>
+  <b>Tags:</b>
+  <%=h @doc.tags %>
+</p>
+
+<p>
+  <b>Prop:</b>
+  <%=h @doc.prop %>
+</p>
+
+
+<%= link_to 'Edit', edit_doc_path(@doc) %> |
+<%= link_to 'Back', docs_path %>
+-->
+<h3 style="background:#ffffff;"><%=@doc[:title] %></h3>
+<div style="height:90%;overflow:auto;border:1px solid #dddddd" >
+	<%=@doc[:content] %>
+</div>

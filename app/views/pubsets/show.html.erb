@@ -1,0 +1,38 @@
+<p>
+  <b>Uid:</b>
+  <%=h @pubset.uid %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%=h @pubset.type %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @pubset.user %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%=h @pubset.password %>
+</p>
+
+<p>
+  <b>Email f:</b>
+  <%=h @pubset.email_f %>
+</p>
+
+<p>
+  <b>Email t:</b>
+  <%=h @pubset.email_t %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%=h @pubset.url %>
+</p>
+
+
+<%= link_to 'Edit', edit_pubset_path(@pubset) %> |
+<%= link_to 'Back', pubsets_path %>

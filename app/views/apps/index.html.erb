@@ -1,0 +1,36 @@
+<h1>Listing apps</h1>
+
+<table>
+  <tr>
+    <th>Creator</th>
+    <th>Appkey</th>
+    <th>Secret</th>
+    <th>Permission</th>
+    <th>Style</th>
+    <th>Type</th>
+    <th>Name</th>
+    <th>Desc</th>
+    <th>Callback</th>
+  </tr>
+
+<% @apps.each do |app| %>
+  <tr>
+    <td><%=h app.creator %></td>
+    <td><%=h app.appkey %></td>
+    <td><%=h app.secret %></td>
+    <td><%=h app.permission %></td>
+    <td><%=h app.style %></td>
+    <td><%=h app.type %></td>
+    <td><%=h app.name %></td>
+    <td><%=h app.desc %></td>
+    <td><%=h app.callback %></td>
+    <td><%= link_to 'Show', app %></td>
+    <td><%= link_to 'Edit', edit_app_path(app) %></td>
+    <td><%= link_to 'Destroy', app, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New app', new_app_path %>

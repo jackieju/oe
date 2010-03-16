@@ -1,0 +1,412 @@
+<!-- app server framework ui -->
+<!-- content of app oe -->
+
+	
+<%= javascript_include_tag :fckeditor %> 
+<%= stylesheet_link_tag 'jquery.autocomplete' %>
+<script src="/javascripts/jquery.autocomplete.js"></script>
+<script src="/javascripts/jquery.copy.js"></script>
+
+
+
+<script>
+// called on save
+
+var h_autoSave;
+
+
+function doSave(){
+
+		content = g_fckeditor.GetXHTML(true);
+		
+		docid = $("#docid").val();
+		if (!docid){
+			clearInterval(g_saveThread);
+			return;
+		}
+		doctitle = $("#doctitle").val();
+		pattern = /[</>]/
+		if (pattern.test(doctitle)){
+			alert("标题不能包含'<>/'");
+			return false;
+		}
+		t = new Date();
+	//	alert(content);
+		$.ajax({
+			type: "post",
+			url: "/editor/save?t="+ t.getTime(),
+			data: {
+				docid:docid,
+		 		content:content,
+				title:doctitle,
+				authenticity_token:window._token
+			}, 
+			success: function(data, textStatus){
+
+			//	alert( "Data Saved: " + data +","+ textStatus);
+			        $("#status p").html('Saved at '+t);
+				g_fckeditor.ResetIsDirty();
+				//	$("#friends").get(0).innerHTML=data;
+			},
+			error: function(xhr, textStatus, errorThrow){
+
+				alert("error"+errorThrow+","+textStatus+","+xhr.responseText);
+
+			}
+		});
+	
+    $("#status p").html('Saving...');
+        return false; //this disables default action (submitting the form)
+}	
+// called when FCKeditor is done starting..
+function FCKeditor_OnComplete( editorInstance ){
+
+	g_fckeditor = editorInstance;
+	
+    editorInstance.LinkedField.form.onsubmit = doSave;
+
+<% if @doc %>
+	<% logger.info(@doc[:content].gsub(/\"/, "\\\"").gsub(/\n/, "\\\n")) %>
+	g_fckeditor.SetHTML("<%=@doc[:content].gsub(/\"/, "\\\"").gsub(/\r/, "").gsub(/\n/, "\\\n") %>");
+<% end %>
+//$(g_fckeditor.EditorDocument).resizable();
+
+//alert($(g_fckeditor.EditorDocument).text());
+//alert(g_fckeditor.EditorWindow.style);
+	//alert($(g_fckeditor.EditorWindow).height(1000));
+		g_fckeditor.ResetIsDirty();
+
+}
+function autoSave(){
+	//alert(g_fckeditor.IsDirty());
+	if (!g_fckeditor)
+		return;
+	if (g_fckeditor.IsDirty())
+		doSave();
+}
+function changed(){
+	if (!g_fckeditor)
+		return false;
+	return g_fckeditor.IsDirty();
+}
+
+
+function enableAutoSave(){
+	h_autoSave = setInterval("autoSave();", 10000);
+}
+
+function disableAutoSave(){
+	clearInterval(h_autoSave);
+	h_autoSave = null;
+}
+
+function toggleAutoSave(){
+	if (h_autoSave){
+		disableAutoSave();
+		$("#toggle_autosave").css({
+			"background": "#ffffff",
+			"border-width": "1px",
+			"border-style": "outset",
+			"border-color": "#0088bb"
+		});
+		$('#status p').html("AutoSave disabled");
+	}else{
+		enableAutoSave();
+		$("#toggle_autosave").css({
+			"background": "#ccddcc",
+			"border-width": "1px",
+			"border-style": "inset",
+			"border-color": "#0088bb"
+		});
+		$('#status p').html("AutoSave enabled");
+	}
+}
+
+var fsMode = 0;
+function fullScreen(){
+	if (fsMode == 1){
+			$('#left').css('display', 'block');
+			$('#right').css('display', 'block');
+			$('#header').css('display', 'block');
+			$('#footer').css('display', 'block');
+			$('#middle').width("700px");
+			$('#middle').height("470px");
+			$('#middle iframe').height("390px");
+			fsMode = 0;
+	}else{
+		$('#left').css('display', 'none');
+		$('#right').css('display', 'none');
+		$('#header').css('display', 'none');
+		$('#footer').css('display', 'none');
+		$('#middle').width("1000px");
+		$('#middle').height("570px");
+		$('#middle iframe').height("500px");
+		fsMode = 1;
+	}
+	/*$(g_fckeditor.EditorDocument).width("1000");
+			alert('d');
+	$(g_fckeditor.EditorWindow).width("1000");
+	alert('d');*/
+}
+
+function shareDoc(){
+$('#share').jqmShow();
+}
+
+var email_docid;
+function before_email(docid){
+	email_docid=docid;
+	$('#email').jqmShow();
+	$.ajax({
+		type:"get",
+		url:"/editor/search_email?t="+ new Date().getTime(),
+		data:{type:'from'},
+		success:function(data, textStatus){
+			
+			$('#email_from').autocomplete(data.split(";"));
+			//alert(data.split(";"));
+		}
+	})
+	$.ajax({
+		type:"get",
+		url:"/editor/search_email?t="+ new Date().getTime(),
+		data:{type:'to'},
+		success:function(data, textStatus){
+			$('#email_address').autocomplete(data.split(";"));
+				//alert(data.split(";"));
+		}
+	})
+
+
+}
+
+function email_doc(docid, email){
+	docid = email_docid;
+	email = $('#email_address').val();
+	email_from = $('#email_from').val();
+  $.ajax({
+            type: "post",
+            url: "/editor/email_doc?t="+ new Date().getTime(),
+            data: {
+                docid:docid,
+				email:email,
+				from: email_from,
+                authenticity_token:window._token
+            },
+            success: function(data, textStatus){
+            //   alert( "Data Saved: " + data +","+ textStatus);
+                    $("#status p").html(data);
+                //  $("#friends").get(0).innerHTML=data;
+				$("#email").jqmHide();
+            },
+            error: function(xhr, textStatus, errorThrow){
+   				alert("error"+errorThrow+","+textStatus+","+xhr.responseText);
+            }
+        });
+
+
+}
+
+function pub_by_mwla(){
+	if (changed()){
+		if (window.confirm("您的文章还没有保存， 需要先保存吗？") != true)
+			doSave();
+	}
+	var docid=$('#docid').val();
+	username = $('#p_username').val();
+	pwd = $('#p_pwd').val();
+	url = $('#p_url').val();
+	dest = $('#p_dest').val();
+	$.ajax({
+		type:"post",
+		url:"/editor/pub_by_mwla?t="+ new Date().getTime(),
+        data: {
+                docid:docid,
+                username: username,
+				pwd: pwd,
+				url: url,
+				dest:dest,
+                authenticity_token:window._token
+            },  
+        success: function(data, textStatus){
+            //  alert( "Data Saved: " + data +","+ textStatus);
+                    $("#status p").html(data);
+                //  $("#friends").get(0).innerHTML=data;
+        //        $("#MetaWebLogPub").jqmHide();
+            },
+        error: function(xhr, textStatus, errorThrow){
+                alert("error"+errorThrow+","+textStatus+","+xhr.responseText);
+            }
+
+
+	});
+
+                $("#MetaWebLogPub").jqmHide();
+}
+
+function pub(dest){
+//	$('#iframe_publish').attr("src", "http://www.kaixin001.com/diary/write.php?title=ddd&content=aaaaa");
+//	$('#publish').jqmShow();
+	doctitle = $("#doctitle").val();
+	sg = "<br><div style='background:#ffddff;text-align:right;font-size:10pt;'><font color='#aaaaff'>This article is created by </font><a href='http://oe.monweb.cn' target='_blank' >开心写作网</a></div>";
+//	c = encodeURIComponent(g_fckeditor.GetXHTML(true)+sg);
+//	t = encodeURIComponent(doctitle);
+	c = escape(g_fckeditor.GetXHTML(true)+sg);
+	t = escape(doctitle);
+	var ref;
+	if (dest == 'kaixin')
+		ref = window.open("http://www.kaixin001.com/diary/write.php?title="+t+"&content="+c, "");
+	else if (dest == 'sohu')
+		ref = window.open("http://blog.sohu.com/manage/entry.do?m=add&t=shortcut&entrytitle="+t+"&entrycontent="+c, "");
+	else if (dest == 'csdn'){
+		$('#blog_name').html("CSDN");
+		$('#MetaWebLogPub').jqmShow();
+		$('#p_dest').val('csdn');
+		$('input#p_url').attr('disabled', 'disabled');
+		$('#p_url').val("http://blog.csdn.net/[userid]/services/MetaBlogApi.aspx");
+	}		
+	else if (dest == 'other_wp'){
+		$('#blog_name').html("其他支持MetaWeblogApi的网站");
+		$('#MetaWebLogPub').jqmShow();
+		$('#p_dest').val('other_wp');
+		$('input#p_url').attr('disabled', '');
+	}		
+	
+//	alert($(ref.document).find("body").html("dfafafafaf"));
+//	alert($("#iframe_publish").length);
+}
+
+function autopub(){
+	params={};
+	showDlg("/pubsets", params)
+}
+
+</script>
+<div id="MetaWebLogPub" class="jqmWindow" style="">
+	发布到<span id="blog_name"></span>
+	<table>
+		<tr id='dest' ><td><lable>Url</label></td><td><input id="p_url"  disabled="disabled" value="" style="width:300px"/></td></tr>
+		<tr><td><lable>user name</label></td><td><input id="p_username" /></td></tr>
+		<tr><td><lable>password</label></td><td><input id="p_pwd" type="password" /></td></tr>
+		<tr><td><lable><!--Publish url--></lable></td><td><input id="p_dest" type="hidden" style="width:300px"  value=""/></td></tr>
+	</table>
+	<div style="text-align:right;">
+        <a href="javascript:void(0)" onclick="pub_by_mwla()" >ok</a>
+        <a href="javascript:void(0)" onclick="$('#MetaWebLogPub').jqmHide();">close</a>
+    </div>
+</div>
+<div id="share" class="jqmWindow" style="width:500px;" >
+<% if @doc %>
+	You can share this document with url <input id="shareUrl" size="30" value="http://oe.monweb.cn/docs/<%=@doc[:id]%>" ></input><button style="display:none" id="btCopy" onclick="$.copy($('#shareUrl').val());" label="copy" value="copy" >copy</button>
+<% end %>
+</div>
+<div id="email" class="jqmWindow" style="width:500px;" >
+	Please input email address: (some blog need specific from address)<br>
+	<table>
+		<tr><td style="width:50px;text-align:right;">From:</td><td><input id="email_from" style="width:230px;" > (optional)</td></tr>
+		<tr><td style="width:50px;text-align:right;">To:</td><td><input id="email_address" style="width:230px;" ></td></tr>
+	</table>
+	<div style="clear:both;"></div>
+	<div style="text-align:right;">
+		<a href="javascript:void(0)" onclick="email_doc()" >ok</a>
+		<a href="javascript:void(0)" onclick="$('#email').jqmHide();">close</a>
+	</div>
+</div>
+
+<div id="publish" class="jqmWindow" style="background:#ffffff;position:absolute;padding:0px;left:500px;top:0;width:1000px;height:520px;" >
+	<div class="jqmnTitle jqDrag" style="margin:0px;padding:0px 5px;overflow:hidden;cursor:pointer;width:100%;border-width:0px;">
+		发布到kaixin
+	</div>
+<!--
+	<form method="get" action="http://www.kaixin001.com/diary/write.php">
+		<input name="title" value="aaa" type=hidden />
+		<input type="submit" />
+	</form>
+	<iframe id="iframe_publish" src="" style="float:none;position:relative;left:0px;top:0px;" width="1000px" height="500px">
+	</iframe>
+-->
+</div>
+
+<% if @doc %>
+<div id="status" style="text-align:center;font-size:8pt;">
+	<p >Just loaded</p>
+</div>
+<form id="docform">
+	<input type="hidden" id="docid" value="<%=@doc[:id] %> "></input>
+
+	<ul  class="" id="menu_list" style="float:none;" >
+	<li>	标题： <input name="title" id="doctitle" value="<%=@doc[:title]%>"></input> </li>
+	<li><a href="javascript:void(0)">导出</a></li>
+	<li><a href="javascript:void(0)" >发布</a>
+		<ul style="width:250px;">
+		<li><a href="javascript:void(0)" onclick="autopub();" >自动发布</a><br></li>
+		<li onclick="pub_kaixin()" ><a href="javascript:void(0);" onclick="pub('kaixin');">开心网</a><br></li>
+		<li><a href="javascript:void(0)" onclick="pub('sohu')">搜狐博客</a><br></li>
+		<li><a href="javascript:void(0)" onclick="pub('csdn')">CSDN</a><br></li>
+		<li><a href="javascript:void(0)" onclick="pub('other_wp')">其他支持MetaWeblogApi的网站</a></li>
+		</ul>
+	</li>
+	<li><a href="javascript:void(0)" title="Email" onclick="before_email('<%=@doc[:id]%>')" ><img src="/images/gx_fsghy.gif" style="border-width:0px;" /></a></li>
+	<li><a href="javascript:void(0)" title="全屏" onclick="fullScreen();">全屏</a></li>
+	<li><a href="javascript:void(0)" onclick="delDoc(
+			<%=@doc[:id]%>, 
+			<% if @doc[:title] && @doc[:title].size >0 %>
+				'<%=@doc[:title]%>'
+			<% else %>
+				'[无标题]'
+			<% end %>
+			)"> <img src="/images/delete.gif" style="border-width:0px;width:12px;"/></a></li>
+	<li><a href="javascript:void(0)" id="toggle_autosave" title="自动保存" onclick="toggleAutoSave();" style="padding:2px;font-size:8pt;color:#000;" onmouseover="if (!h_autoSave) $(this).css('border-style', 'inset');" onmouseout="if (!h_autoSave) $(this).css('border-style', 'outset');">AutoSave</a></li>
+	<li><a href="javascript:void(0)" title="Share" onclick="shareDoc();">Share</a></li>
+	</ul>
+
+<%= fckeditor_textarea("object", "field", :toolbarSet => 'Easy', :width => '100%', :height => '390px') %>
+</form>
+<script>
+$("#share").jqm();
+$("#email").jqm();
+$('#publish').jqm();
+$('#publish').jqDrag('.jqDrag', null);
+$('#menu_list').simplemenu();
+$('#MetaWebLogPub').jqm();
+</script>
+<% else %>
+<%#=render :template=>"editor/list", :layout=>false %>
+<% if !@doc_list %>
+<script>
+	showMiddle('/editor/list/1', 0);
+</script>
+<% end %>
+您的大作:
+
+<% if @doc_list %>
+<table class="post_list" style="table-layout:fixed">
+<tr><b><td style="min-width:200px;">标题</td><td>最后更新</td><td>创建</td></b></tr>
+	<% for doc in @doc_list %>
+	<tr><td class="post_title"><a href="/editor/index?docid=<%=doc[:id]%>" >
+		<% if doc[:title] && doc[:title].size >0 %>
+			<%=doc[:title]%>
+			<% else %>
+			[无标题]
+		<% end %>
+		</a></td>
+		<td>
+		<%=doc[:updated_at].strftime('%Y-%m-%d %H:%m:%S') %>
+		</td>
+		<td>
+			<%=doc[:created_at].strftime('%Y-%m-%d %H:%m:%S') %>
+		</td>
+		<td style="text-align:center;width:50px;">
+		<a href="javascript:void(0)" onclick="delDoc(<%=doc[:id]%>)"> <img src="/images/delete.gif" style="border-width:0px;width:12px;"/></a>
+		</td>
+	</tr>
+	<%end%>
+</table>
+<div id="pager"></div>
+<% end %>
+<% end %>
+<script>
+//$(g_fckeditor.EditorDocument).height("1000px");
+toggleAutoSave();
+ $("#pager").pager({ pagenumber: 1, pagecount: 10, buttonClickCallback: showDoc });
+</script>

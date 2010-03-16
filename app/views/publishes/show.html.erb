@@ -1,0 +1,23 @@
+<p>
+  <b>Uid:</b>
+  <%=h @publish.uid %>
+</p>
+
+<p>
+  <b>Docid:</b>
+  <%=h @publish.docid %>
+</p>
+
+<p>
+  <b>Doctitle:</b>
+  <%=h @publish.doctitle %>
+</p>
+
+<p>
+  <b>To:</b>
+  <%=h @publish.to %>
+</p>
+
+
+<%= link_to 'Edit', edit_publish_path(@publish) %> |
+<%= link_to 'Back', publishes_path %>

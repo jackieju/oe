@@ -1,0 +1,23 @@
+<p>
+  <b>Uid:</b>
+  <%=h @userapp.uid %>
+</p>
+
+<p>
+  <b>Appkey:</b>
+  <%=h @userapp.appkey %>
+</p>
+
+<p>
+  <b>Permission:</b>
+  <%=h @userapp.permission %>
+</p>
+
+<p>
+  <b>Style:</b>
+  <%=h @userapp.style %>
+</p>
+
+
+<%= link_to 'Edit', edit_userapp_path(@userapp) %> |
+<%= link_to 'Back', userapps_path %>

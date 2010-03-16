@@ -1,0 +1,2 @@
+module GuestMsgsHelper
+end

@@ -1,0 +1,28 @@
+<h1>Editing publish</h1>
+
+<% form_for(@publish) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :uid %><br />
+    <%= f.text_field :uid %>
+  </p>
+  <p>
+    <%= f.label :docid %><br />
+    <%= f.text_field :docid %>
+  </p>
+  <p>
+    <%= f.label :doctitle %><br />
+    <%= f.text_field :doctitle %>
+  </p>
+  <p>
+    <%= f.label :to %><br />
+    <%= f.text_field :to %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @publish %> |
+<%= link_to 'Back', publishes_path %>

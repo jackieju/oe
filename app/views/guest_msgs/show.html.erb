@@ -1,0 +1,13 @@
+<p>
+  <b>Uid:</b>
+  <%=h @guest_msg.uid %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%=h @guest_msg.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_guest_msg_path(@guest_msg) %> |
+<%= link_to 'Back', guest_msgs_path %>

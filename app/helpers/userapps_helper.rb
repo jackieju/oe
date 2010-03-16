@@ -1,0 +1,2 @@
+module UserappsHelper
+end

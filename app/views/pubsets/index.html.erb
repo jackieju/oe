@@ -1,0 +1,211 @@
+<script>
+function onchangetype(e){
+	t = $(e.target);
+	if (t.val() == "email"){
+		$(t.parent().find(".blog_url")[0]).parent().fadeOut();
+		$(t.parent().find(".blog_username")[0]).parent().fadeOut();
+		$(t.parent().find(".blog_pwd")[0]).parent().fadeOut();
+		$(t.parent().find(".blog_emailf")[0]).parent().fadeIn();
+		$(t.parent().find(".blog_emailt")[0]).parent().fadeIn();
+	}else if (t.val() == "metaweblog"){
+		$(t.parent().find(".blog_emailf")[0]).parent().fadeOut();
+		$(t.parent().find(".blog_emailt")[0]).parent().fadeOut();
+		$(t.parent().find(".blog_url")[0]).parent().fadeIn();
+		$(t.parent().find(".blog_username")[0]).parent().fadeIn();
+		$(t.parent().find(".blog_pwd")[0]).parent().fadeIn();
+		}
+}
+function add_line(){
+	n = $('#input_clone').clone();
+	n.attr("id", "");
+	$('#blogsetting').append(n);
+//	n.css("display:block");
+	n.fadeIn();
+	n.find("select").change(onchangetype).change();
+	n.find("input.blog_name").blur(onurlblur);
+}
+
+function del_line(node){
+	$(node).parent().fadeOut('slow');
+	$(node).parent().remove();
+}
+
+function get_req(){
+	p = $('#blogsetting');
+	blog_names = p.find('.blog_name');
+	blog_types = p.find('.blog_type');
+	blog_usernames = p.find('.blog_username');
+	blog_pwds = p.find('.blog_pwd');	
+	blog_emailf = p.find('.blog_emailf');
+	blog_emailt = p.find('.blog_emailt');
+	blog_url = p.find('.blog_url');
+	blog_auto = p.find('.blog_auto');
+	var req="";
+
+	for (a = 0; a < blog_names.size();a++){
+		emailf ="";
+		emailt ="";
+		name ="";
+		type ="";
+		username ="";
+		password ="";
+		url="";
+		name = $(blog_names[a]).val();
+		auto = $(blog_auto[a]).attr('checked')+"";
+
+		type = $(blog_types[a]).val();
+		if (!type || type.size==0){
+			alert("type 不能为空");
+			return false;
+		}
+		if (type=='metaweblog'){
+			url = $(blog_url[a]).val();
+			if (!url || url.size==0){
+				alert("url 不能为空");
+				return false;
+			}
+			username = $(blog_usernames[a]).val();
+			if (!username || username.size==0){
+				alert("username 不能为空");
+				return false;
+			}
+			password = $(blog_pwds[a]).val();
+			if (!password || password.size==0){
+				alert("password 不能为空");
+				return false;
+			} 
+			
+		}else
+		if (type=='email'){
+			emailf = $(blog_emailf[a]).val();
+			emailt = $(blog_emailt[a]).val();
+			if (!emailt || emailt.size==0){
+				alert("邮件地址 不能为空");
+				return false;
+			}
+			
+		}
+
+		obj = {
+			blog_name:jQuery.trim(name),
+			blog_type:jQuery.trim(type),
+			blog_username:jQuery.trim(username),
+			blog_pwd:jQuery.trim(password),
+			blog_emailf:jQuery.trim(emailf),
+			blog_emailt:jQuery.trim(emailt),
+			blog_url:jQuery.trim(url),
+			blog_auto:jQuery.trim(auto)
+		}
+		req = req+toJSON(obj)+";#;";
+
+	}
+	return req;
+}
+
+function save(){
+	req = get_req();
+	if (!req)
+		return;
+	$.ajax({
+		type:"post",
+		url:"/pubsets/update_bs?t="+new Date().getTime(),
+		data:{
+			json: req,
+			authenticity_token:window._token
+		},
+		success: function(data, textStatus){
+			//alert( "Data Saved: " + data +","+ textStatus);
+			alert("saved");
+
+		},
+		error: function(xhr, textStatus, errorThrow){
+			alert("error"+errorThrow+","+textStatus+","+xhr.responseText);
+		}
+	});
+}
+
+function pub_all(){
+	
+	req = get_req();
+	if (!req)
+		return;
+	var docid=$('#docid').val();
+	$.ajax({
+		type:"post",
+		url:"/pubsets/pub_all?t="+new Date().getTime(),
+		data:{
+			docid: docid,
+			json: req,
+			authenticity_token:window._token
+		},
+		success: function(data, textStatus){
+			//alert( "Data Saved: " + data +","+ textStatus);
+			alert(data);
+		},
+		error: function(xhr, textStatus, errorThrow){
+			alert("error"+errorThrow+","+textStatus+","+xhr.responseText);
+		}
+	});
+	$(this).parent().parent().jqmHide();
+}
+
+
+function onurlblur(e){
+	t = $(e.target);
+	re = /csdn/i;
+	if (t.val().match(re)){
+		t.parent().find(".blog_url").val("http://blog.csdn.net/");
+	}
+}
+
+
+</script>
+<div>
+
+	<div id="blogsetting"  style="margin:0px;padding:0px;">
+		Blog Publish Settings:
+		<% if !@list || @list.size==0%>
+		<!--<br><div style="width:300px;">您还没有添加任何设置</div>-->
+		<% else %>
+	
+		<% for l in @list  do%>
+		<div class="input_line" style="background:#8888dd;border:1px dotted #8888ff;padding-left:6px;padding-bottom:6px;padding-right:11px;margin:1px;" >
+			
+<span class="lable" style="width:35px;">name</span>&nbsp;<input class="input_value blog_name" size="10" value="<%=l['blog_name']%>"/>&nbsp;
+自动发布<input type=checkbox class="blog_auto" <% if l['blog_auto']=="true" %> checked <%end%> />&nbsp;<a href="javascript:void(0);" title="delete" onclick="del_line(this);"><img src="/images/delete.gif" border="0px"></a><br>
+			<span class="lable" style="width:35px;">type</span>&nbsp;<select  class="input_value blog_type" >
+				<option <% if l['blog_type']=="metaweblog" %>selected<%end%> >metaweblog</option>
+				<option <% if l['blog_type']=="email" %>selected<%end%> >email</option>
+				</select>
+			<span class="lable">url&nbsp;<input class="input_value blog_url" value="<%=l['blog_url'] %>" size="24" /></span>
+			<span class="lable">user name&nbsp;<input class="input_value blog_username" size="8" value="<%=l['blog_username'] %>"/>	</span>
+			<span class="lable">&nbsp;password&nbsp;<input class="input_value blog_pwd" size="8" type="password" value="<%=l['blog_pwd'] %>"/></span>
+			<span class="lable">Email from&nbsp;<input class="input_value blog_emailf" size="22" value="<%=l['blog_emailf'] %>"/>	</span>
+			<span class="lable">&nbsp;Email To&nbsp;<input class="input_value blog_emailt" size="22" value="<%=l['blog_emailt'] %>"/></span>
+		</div>	
+		<% end %>
+		<% end %>
+	</div>
+<a href="javascript:void(0)" onclick="add_line()">Add</a>
+<a href="javascript:void(0)" onclick="save()">Save</a>
+<a href="javascript:void(0)" onclick="$(this).parent().parent().jqmHide();">Close</a>
+<a href="javascript:void(0)" onclick="pub_all();" style="float:right;">发布&nbsp;</a>
+</div>
+
+	<div id="input_clone" class="input_line" style="display:none;background:#8888dd;border:1px dotted #8888ff;padding-left:6px;padding-bottom:6px;padding-right:11px;margin:1px;" >
+		<span class="lable" style="width:35px;">name</span>&nbsp;<input class="input_value blog_name" size="10" />&nbsp;
+		自动发布<input type=checkbox class="blog_auto"  checked="false" />&nbsp;<a href="javascript:void(0);" title="delete" onclick="del_line(this);"><img src="/images/delete.gif" border="0px"></a><br>
+		<span class="lable" style="width:35px;">type</span>&nbsp;<select value="metaweblog"  class="blog_type" ><option>metaweblog</option><option>email</option></select>
+		<span class="lable">url&nbsp;<input class="input_value blog_url" size="24" /></span>
+		<span class="lable">user name&nbsp;<input class="input_value blog_username" size="8" />	</span>
+		<span class="lable">&nbsp;password&nbsp;<input class="input_value blog_pwd" size="8" type="password" /></span>
+		<span class="lable"  style="display:none">Email from&nbsp;<input class="input_value blog_emailf" size="22"/>	</span>
+		<span class="lable"  style="display:none">&nbsp;Email To&nbsp;<input class="input_value blog_emailt" size="22" /></span>
+	</div>
+	
+	<script>
+
+	$("select").change(onchangetype).change();
+	$(".blog_name").blur(onurlblur);
+	
+	</script>

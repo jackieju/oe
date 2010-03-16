@@ -1,0 +1,26 @@
+<h1>Listing userapps</h1>
+
+<table>
+  <tr>
+    <th>Uid</th>
+    <th>Appkey</th>
+    <th>Permission</th>
+    <th>Style</th>
+  </tr>
+
+<% @userapps.each do |userapp| %>
+  <tr>
+    <td><%=h userapp.uid %></td>
+    <td><%=h userapp.appkey %></td>
+    <td><%=h userapp.permission %></td>
+    <td><%=h userapp.style %></td>
+    <td><%= link_to 'Show', userapp %></td>
+    <td><%= link_to 'Edit', edit_userapp_path(userapp) %></td>
+    <td><%= link_to 'Destroy', userapp, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New userapp', new_userapp_path %>

@@ -1,0 +1,40 @@
+<h1>Editing pubset</h1>
+
+<% form_for(@pubset) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :uid %><br />
+    <%= f.text_field :uid %>
+  </p>
+  <p>
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </p>
+  <p>
+    <%= f.label :user %><br />
+    <%= f.text_field :user %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.text_field :password %>
+  </p>
+  <p>
+    <%= f.label :email_f %><br />
+    <%= f.text_field :email_f %>
+  </p>
+  <p>
+    <%= f.label :email_t %><br />
+    <%= f.text_field :email_t %>
+  </p>
+  <p>
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @pubset %> |
+<%= link_to 'Back', pubsets_path %>

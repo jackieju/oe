@@ -1,0 +1,13 @@
+<p>
+  <b>Content:</b>
+  <%=h @memo.content %>
+</p>
+
+<p>
+  <b>Tags:</b>
+  <%=h @memo.tags %>
+</p>
+
+
+<%= link_to 'Edit', edit_memo_path(@memo) %> |
+<%= link_to 'Back', memos_path %>

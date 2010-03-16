@@ -1,0 +1,94 @@
+	<div id="ex3c<%=@number %>" class="jqmNotice jqDrag" style="cursor:pointer;width:auto;height:auto;position:absolute;" onclick="activate(this);">
+
+		<div class="jqmnTitle jqDrag" style="overflow:hidden;">
+			<h1 style="font-size:6pt;overflow:hidden;"><%=@memo[:updated_at]%></h1>
+		</div>
+
+		<div class="jqmnContent" style="width:auto;height:auto;overflow:hidden;" >
+			<textArea id="<%=@memo[:id] %>" changed="0" class="jqmnContent" rows="6" style="width:80%;height:100%;word-break: break-all;word-wrap:break-word;overflow:hidden;padding: 2px 10px;background:transparent;border-width:0px;" ><%=@memo[:content]%></textArea>
+		</div>	
+
+		<img src="/images/close_icon.png" alt="delete" class="jqmClose" />
+		<img src="/images/resize.gif" alt="resize" class="jqResize" />
+	</div>
+<!-- fix for IE6 -->
+<div id="ex3cdummy<%=@number%>" class="jqmNotice jqDrag" style="position:absolute;display:none" onclick="activate(this);return false;">
+
+
+        <div class="jqmnTitle jqDrag" style="overflow:hidden;cursor:pointer;">
+            <h1 style="font-size:6pt;overflow:hidden;"></h1>
+
+        </div>
+        
+        <div class="jqmnContent" style="width:auto;height:auto;overflow:hidden;" >
+            <textArea id="dummy" changed="0" class="jqmnContent" style="word-break:break-all;word-wrap:break-word;width:100%;height:100%;overflow:hidden;padding: 2px 10px;background:transparent;border-width:0px;
+" ></textArea>
+        </div>
+        
+        <img src="/images/close_icon.png" alt="delete" class="jqmClose" ></img>
+        <img src="/images/resize.gif" alt="resize" class="jqResize" ></img>
+    </div>
+<!-- end of fix -->
+
+
+<script>
+//$().ready(function() {
+
+//	alert($('#ex3c').find('textarea').val()+"ddddd");
+
+
+	$('#ex3c<%=@number %>').jqDrag('.jqDrag', onMemoMove);
+
+	$('#ex3c<%=@number %>').jqResize('.jqResize', onMemoMove);
+
+	//$('#ex3c').resizable({ 
+	//	alsoResize: '#text1',
+	//	minWidth:100,
+	//	minHeight:100
+	 //});
+	$('#ex3c<%=@number %>').jqm({
+		//	trigger:'#ex3cTrigger',
+		overlay: 0,
+		onShow: function(h) {
+			/* callback executed when a trigger click. Show notice */
+			h.w.css('opacity',0.92).slideDown(); 
+
+		},
+		onHide: function(h) {
+			/* callback executed on window hide. Hide notice, overlay. */
+			h.w.slideUp("slow",function() { if(h.o) h.o.remove(); }); 
+		} 
+	});
+	$('#ex3c<%=@number%>').css({left:0, top:0, width:300, height:200});
+	
+	$('#ex3c<%=@number %>').jqmShow();
+	$('#ex3c<%=@number %> textarea').blur(onMemoBlur);
+	$('#ex3c<%=@number %> textarea').keydown(function(e){$(e.target).attr('changed', 1);});
+
+// fix for IE6
+$('#ex3cdummy<%=@number%>').jqDrag('.jqDrag', onMemoMove);
+$('#ex3cdummy<%=@number%>').jqResize('.jqResize', onMemoMove);
+ $('#ex3cdummy<%=@number%>').jqm({
+    
+		overlay:0,
+        onShow: function(h) {
+       
+    h.w.css('opacity',0.92).fadeIn();
+        },
+        onHide: function(h) {
+            delMemo(h.w.find("textarea"));
+            h.w.slideUp("slow",function() { if(h.o) h.o.remove(); });
+        }
+    });
+    $('#ex3cdummy<%=@number%>').css({left:0, top:0, width:300, height:200});
+    $('#ex3cdummy<%=@number%> textarea').css({width:0, height:0 });
+    $('#ex3cdummy<%=@number%>').jqmShow();
+
+//    $('#ex3cdummy<%=@number%> textarea').blur(onMemoBlur);
+    $('#ex3cdummy<%=@number%> textarea').keydown(function(e){$(e.target).attr('changed', 1);});
+	$('#ex3cdummy<%=@number%>').css("display", "none");
+// end of fix
+
+//	});
+	
+</script>
