@@ -1,0 +1,352 @@
+﻿.webos-canvas{
+	width:100%;
+	background-position:top;
+	background-color:#112D5C;
+	margin-top:0px;
+	background-repeat:no-repeat;
+	visibility:hidden;
+}
+.webos-canvas-800{
+	width:100%;
+	background-position:top;
+	background-color:#112D5C;
+	margin-top:0px;
+	background-repeat:no-repeat;
+	visibility:hidden;
+	background-image:url(img/portal_background_800.jpg);
+}
+.webos-canvas-1024{
+	width:100%;
+	background-position:top;
+	background-color:#112D5C;
+	margin-top:0px;
+	background-repeat:no-repeat;
+	visibility:hidden;
+	background-image:url(img/portal_background_1024.jpg);
+}
+.webos-canvas-1280{
+	width:100%;
+	background-position:top;
+	background-color:#112D5C;
+	margin-top:0px;
+	background-repeat:no-repeat;
+	visibility:hidden;
+	background-image:url(img/portal_background_1280.jpg);
+}
+.webos-canvas-1440{
+	width:100%;
+	background-position:top;
+	background-color:#112D5C;
+	margin-top:0px;
+	background-repeat:no-repeat;
+	visibility:hidden;
+	background-image:url(img/portal_background_1440.jpg);
+}
+.webos-canvas-1680{
+	width:100%;
+	background-position:top;
+	background-color:#112D5C;
+	margin-top:0px;
+	background-repeat:no-repeat;
+	visibility:hidden;
+	background-image:url(img/portal_background_1680.jpg);
+}
+.webos-canvas-2550{
+	width:100%;
+	background-position:top;
+	background-color:#112D5C;
+	margin-top:0px;
+	background-repeat:no-repeat;
+	visibility:hidden;
+	background-image:url(img/portal_background_2550.jpg);
+}
+.webos-sign{
+	width:474px;
+	height:470px;
+	padding:0px;
+	margin:auto;
+	position:absolute;
+}
+.webos-sign-shadow{
+	width:474px;
+}
+.webos-sign-shadow td{
+	font-size:0px;
+	line-height:0px;
+}
+.webos-sign-shadow-nw{
+	height:7px;
+	width:7px;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/widget_shadow_nw_alt.png', sizingMethod='scale');
+}
+.webos-sign-shadow-nw[class]{
+	background:url(../../img/widget_shadow_nw_alt.png) repeat-x;
+}
+.webos-sign-shadow-n{
+	height:7px;
+	width:460px;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/widget_shadow_n.png', sizingMethod='scale');
+}
+.webos-sign-shadow-n[class]{
+	background:url(../../img/widget_shadow_n.png) repeat-x;
+}
+.webos-sign-shadow-ne{
+	height:7px;
+	width:7px;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/widget_shadow_ne_alt.png', sizingMethod='scale');
+}
+.webos-sign-shadow-ne[class]{
+	background:url(../../img/widget_shadow_ne_alt.png) repeat-x;
+}
+.webos-sign-shadow-e{
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/widget_shadow_e.png', sizingMethod='scale');
+}
+.webos-sign-shadow-e[class]{
+	background:url(../../img/widget_shadow_e.png) repeat-y;
+}
+.webos-sign-shadow-se{
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/widget_shadow_se.png', sizingMethod='scale');
+	height:7px;
+}
+.webos-sign-shadow-se[class]{
+	background:url(../../img/widget_shadow_se.png) repeat-x;
+}
+.webos-sign-shadow-s{
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/widget_shadow_s.png', sizingMethod='scale');
+	height:7px;
+}
+.webos-sign-shadow-s[class]{
+	background:url(../../img/widget_shadow_s.png) repeat-x;
+}
+.webos-sign-shadow-se[class]{
+	background:url(../../img/widget_shadow_se.png) repeat-x;
+}
+.webos-sign-shadow-sw{
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/widget_shadow_sw.png', sizingMethod='scale');
+	height:7px;
+}
+.webos-sign-shadow-sw[class]{
+	background:url(../../img/widget_shadow_sw.png) repeat-x;
+}
+.webos-sign-shadow-w{
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/widget_shadow_w.png', sizingMethod='scale');
+}
+.webos-sign-shadow-w[class]{
+	background:url(../../img/widget_shadow_w.png) repeat-y;
+}
+.webos-sign-shadow-center{
+	font-size:0px;
+	line-height:0px;
+	width:460px;
+}
+.webos-sign-inner{
+	width:460px;
+	height:456px;
+	background:url(img/sign_background.gif);
+	font-size:12px;
+	line-height:12px;
+}
+.webos-sign-inner td{
+	font-size:12px;
+	line-height:12px;
+}
+.webos-sign td{
+	vertical-align:top;
+}
+.webos-sign-title{
+	height:175px;
+	background:url(img/sign_logo.jpg) no-repeat center;
+}
+.webos-sign-body{
+	height:230px;
+	background:url(img/sign_body_background.gif) no-repeat center;
+}
+/*signin start*/
+.webos-sign-body-signin{}
+.webos-sign-body-signin-title{
+	padding:16px 10px 0px 0px;
+	text-align:right;
+	width:153px;
+}
+.webos-sign-body-signin-title div{
+	height:35px;
+	line-height:35px;
+}
+.webos-sign-body-signin-data{
+	width:142px;
+	padding-top:51px;
+}
+.webos-sign-body-signin-data div{
+	height:35px;
+	background-repeat:no-repeat;
+}
+.webos-sign-body-signin-data-focus{
+	background-image:url(img/sign_input_background.gif);
+}
+.webos-sign-body-signin-data input{
+	border:1px #CCCCCC solid;
+	width:126px;
+	margin-top:5px;
+	height:19px;
+	line-height:19px;
+	font-size:14px;
+}
+.webos-sign-body-signin-data span{
+	display:block;
+	text-align:center;
+}
+.webos-sign-body-signin-data div.webos-sign-body-signin-data-securitycode{
+	position:absolute;
+	margin-left:145px;
+	margin-top:-40px;
+	border:#CCCCCC 1px solid;
+	width:60px;
+	height:20px;
+	visibility:hidden;
+	/*background:#FFFFFF url(../img/signin_verification.jpg) right center no-repeat;*/background:#FFFFFF;
+	padding:0px ;
+	text-align:center;
+}
+.webos-sign-body-signin-action{
+	padding-top:46px;
+	text-align:left;
+}
+.webos-sign-body-signin-action-signin{
+	float:left;
+	width:31px;
+	height:30px;
+	margin-top:13px;
+}
+.webos-sign-body-signin-action-signin a{
+	display:block;
+	width:31px;
+	height:30px;
+}
+.webos-sign-body-signin-action-signin a:link,
+.webos-sign-body-signin-action-signin a:visited{
+	background:url(img/sign_action.jpg);
+}
+.webos-sign-body-signin-action-signin a:hover,
+.webos-sign-body-signin-action-signin a:active{
+	background:url(img/sign_action_active.jpg);
+}
+.webos-sign-body-signin-action-help{
+	margin:21px 0px 0px 4px;
+	float:left;
+	text-align:left;
+}
+/*signin end*/
+.webos-sign-body-signup{
+	display:none;
+}
+.webos-sign-body-signup-title{
+	width:153px;
+	text-align:right;
+	padding:16px 10px 0px 0px;
+}
+.webos-sign-body-signup-title div{
+	height:35px;
+	line-height:35px;
+}
+.webos-sign-body-signup-data{
+	width:142px;
+	padding-top:16px;
+	text-align:left;
+}
+.webos-sign-body-signup-data div{
+	height:35px;
+	background-repeat:no-repeat;
+	text-align:center;
+}
+.webos-sign-body-signup-data input{
+	border:1px #CCCCCC solid;
+	width:126px;
+	margin-top:5px;
+	height:19px;
+	line-height:19px;
+	font-size:14px;
+}
+.webos-sign-body-signup-data span{
+	display:block;
+	text-align:center;
+}
+.webos-sign-body-signup-data div.webos-sign-body-signup-data-securitycode{
+	position:absolute;
+	margin-left:145px;
+	margin-top:-40px;
+	border:#CCCCCC 1px solid;
+	width:69px;
+	height:20px;
+	visibility:hidden;
+	/*background:#FFFFFF url(../img/signin_verification.jpg) right center no-repeat;*/background:#FFFFFF;
+	padding:0px ;
+	text-align:center;
+}
+.webos-sign-body-signup-action{
+	padding-top:46px;
+	text-align:left;
+}
+.webos-sign-body-signup-action-signin{
+	float:left;
+	width:31px;
+	height:30px;
+	margin-top:13px;
+}
+.webos-sign-body-signup-action-signin a{
+	display:block;
+	width:31px;
+	height:30px;
+}
+.webos-sign-body-signup-action-signin a:link,
+.webos-sign-body-signup-action-signin a:visited{
+	background:url(img/sign_action.jpg);
+}
+.webos-sign-body-signup-action-signin a:hover,
+.webos-sign-body-signup-action-signin a:active{
+	background:url(img/sign_action_active.jpg);
+}
+
+.webos-sign-body-signup-action-submit{
+    float:left;
+    margin-top:28px;
+}
+.webos-sign-body-signin-action-submit{
+    float:left;
+    margin-top:28px;
+}
+.webos-sign-body-signup-action-help{
+	margin:21px 0px 0px 4px;
+	float:left;
+	text-align:left;
+}
+
+/**/
+.webos-sign-bottom{
+	text-align:center;
+	padding-top:5px;
+	line-height:20px;
+	font-size:20px;
+}
+.webos-sign-bottom a{
+	padding:10px 14px;
+}
+.webos-sign-bottom a:link,
+.webos-sign-bottom a:visited{
+	background:url(img/sign_shutdown.jpg) no-repeat;
+}
+.webos-sign-bottom a:hover,
+.webos-sign-bottom a:active{
+	background:url(img/sign_shutdown_active.jpg) no-repeat;
+}
+.webos-sign-bottom span{
+	font-size:12px;
+	display:block;
+	line-height:18px;
+}
+.webos-sign-cache{
+	font-size:1px;
+	line-height:1px;
+	width:1px;
+	height:1px;
+	overflow:hidden;
+}

@@ -1,0 +1,28 @@
+div{
+	border:0px solid green;
+	
+}
+
+a{ 
+	color:#8888ff;
+	text-decoration:none;
+}
+a:visited{ 
+	color:#8888ff;
+	text-decoration:none;
+}
+
+
+
+.lable {
+  display:-moz-inline-box;
+  display:inline-block;
+
+}
+
+input{
+	border-color:#EEEEEE #DDDDDD #DDDDDD #EEEEEE;
+	border-style:solid;
+	border-width:1px;
+
+}

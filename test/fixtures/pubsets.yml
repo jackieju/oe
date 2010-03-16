@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  uid: 1
+  type: MyString
+  user: MyString
+  password: MyString
+  email_f: MyString
+  email_t: MyString
+  url: MyString
+
+two:
+  uid: 1
+  type: MyString
+  user: MyString
+  password: MyString
+  email_f: MyString
+  email_t: MyString
+  url: MyString

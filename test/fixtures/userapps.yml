@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  uid: 1
+  appkey: 1
+  permission: 1
+  style: 1
+
+two:
+  uid: 1
+  appkey: 1
+  permission: 1
+  style: 1

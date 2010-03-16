@@ -1,0 +1,47 @@
+﻿.webos-dock {
+	width: 100%;
+	bottom: 1px;
+	position: absolute;
+	left: 0px;
+	z-index:300000;
+	visibility:hidden;
+}
+.webos-dock-container {
+	position: absolute;
+	height: 50px;
+	bottom:0px;
+	padding-left: 20px;
+	z-index:300002;
+	background:url(img/dock_background.gif);
+	border-top:#666666 1px solid;
+	border-left:#666666 1px solid;
+	border-right:#666666 1px solid;
+}
+a.webos-dock-item {
+	display: block; 
+	width: 40px; 
+	bottom: 0px; 
+	position: absolute;
+	text-align: center;
+	text-decoration: none;
+	z-index:300003;
+}
+.webos-dock-item:link,
+.webos-dock-item:visited {
+	color:#CCCCCC;
+}
+.webos-dock-item:hover,
+.webos-dock-item:active {
+	color:#BBBBBB;
+	font-size:12px;
+	font-weight:bold;
+}
+.webos-dock-item span {
+	display: none;
+	padding-left: 20px;
+}
+.webos-dock-item img {
+	border: none; 
+	margin: 5px 10px 0px; 
+	width: 100%; 
+}

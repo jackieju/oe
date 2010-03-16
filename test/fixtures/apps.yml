@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  creator: 1
+  appkey: 1
+  secret: MyString
+  permission: 1
+  style: 1
+  type: 1
+  name: MyString
+  desc: MyString
+  callback: MyString
+
+two:
+  creator: 1
+  appkey: 1
+  secret: MyString
+  permission: 1
+  style: 1
+  type: 1
+  name: MyString
+  desc: MyString
+  callback: MyString

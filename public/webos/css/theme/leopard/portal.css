@@ -1,0 +1,25 @@
+﻿.webos-portal{
+	background-position:top;
+	background-color:#112D5C;
+	background-repeat:no-repeat;
+	overflow:hidden;
+	text-align:center;
+}
+.webos-portal-800{
+	background-image:url(img/portal_background_800.jpg);
+}
+.webos-portal-1024{
+	background-image:url(img/portal_background_1024.jpg);
+}
+.webos-portal-1280{
+	background-image:url(img/portal_background_1280.jpg);
+}
+.webos-portal-1440{
+	background-image:url(img/portal_background_1440.jpg);
+}
+.webos-portal-1680{
+	background-image:url(img/portal_background_1680.jpg);
+}
+.webos-portal-2550{
+	background-image:url(img/portal_background_2550.jpg);
+}

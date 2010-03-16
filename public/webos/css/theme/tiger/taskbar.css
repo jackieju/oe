@@ -1,0 +1,376 @@
+﻿.webos-taskbar{
+	height:22px;
+	background:url(img/taskbar_background.jpg) repeat-x;
+	font-size:12px;
+	color:#000000;
+}
+.webos-taskbar a:link,
+.webos-taskbar a:visited{
+	color:#000000;
+}
+.webos-taskbar a:hover,
+.webos-taskbar a:active{
+	color:#FFFFFF;
+}
+.webos-taskbar-start-container{
+	float:left;
+	display:inline;
+	height:22px;
+	margin-left:15px;
+	line-height:22px;
+}
+.webos-taskbar-start-button{
+	background-image:url(img/taskbar_start_normal.jpg);
+}
+.webos-taskbar-start-button:hover{
+	background-image:url(img/taskbar_start_active.jpg);
+}
+.webos-taskbar-start-button span a{
+	width:15px;
+	display:block;
+}
+
+
+.webos-taskbar-start li {
+	margin: 0;
+	border: 0 none;
+	padding: 0;
+	list-style: none;
+	float:left;
+	position: relative;
+	z-index:400000;
+}
+.webos-taskbar-start ul {
+	margin: 0;
+	border: 0 none;
+	padding: 0;
+	width: 160px;
+	display: none;
+	position: absolute;
+	top: 22px;
+	left: 0;
+	background: #DDDDDD;
+	color: #DDDDDD;
+	z-index:400000;
+}
+.webos-taskbar-start ul li {
+	float:none;
+	display: block !important;
+	display: inline; /*For IE*/
+}
+/* Root Menu */
+.webos-taskbar-start a {
+	padding: 0px 10px 0px 10px;
+	float: none !important; /*For Opera*/
+	float: left; /*For IE*/
+	display: block;
+	height: auto !important;
+	height: 1%; /*For IE*/
+	text-align:left;
+}
+/* Root Menu Hover Persistence */
+.webos-taskbar-start a:hover,
+.webos-taskbar-start li:hover a{
+	
+}
+/* 2nd Menu */
+.webos-taskbar-start li:hover li a{
+	float: none;
+	background-color: #EEEEEE;
+	color: #282826;
+}
+/* 2nd Menu Hover Persistence */
+.webos-taskbar-start li:hover li a:hover,
+.webos-taskbar-start li:hover li:hover a{
+	background-color: #DDDDDD;
+	color: #000000;
+	border-right:#BBBBBB 5px solid;
+}
+/* 3rd Menu */
+.webos-taskbar-start li:hover li:hover li a{
+	background-color: #EEEEEE;
+	color: #282826;
+	border-right:0px none;
+}
+/* 3rd Menu Hover Persistence */
+.webos-taskbar-start li:hover li:hover li a:hover,
+.webos-taskbar-start li:hover li:hover li:hover a{
+	background-color: #DDDDDD;
+	color: #000000;
+	border-right:#BBBBBB 5px solid;
+}
+/* 4th Menu */
+.webos-taskbar-start li:hover li:hover li:hover li a{
+	background-color: #EEE;
+	color: #666;
+}
+/* 4th Menu Hover */
+.webos-taskbar-start li:hover li:hover li:hover li a:hover{
+	background-color: #CCC;
+	color: #FFF;
+}
+.webos-taskbar-start ul ul,
+.webos-taskbar-start ul ul ul {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 160px !important;
+	left:80px;
+}
+/* Do Not Move - Must Come Before display:block for Gecko */
+.webos-taskbar-start li:hover ul ul,
+.webos-taskbar-start li:hover ul ul ul{
+	display: none;
+}
+.webos-taskbar-start li:hover ul,
+.webos-taskbar-start ul li:hover ul,
+.webos-taskbar-start ul ul li:hover ul{
+	display: block;
+}
+/**/
+.webos-taskbar-start-user{
+	height:70px;
+	line-height:70px;
+	border-top:1px #CCCCCC solid;
+	background-image:url(/getuserpicture);
+	background-repeat:no-repeat;
+	background-position:5px 5px;
+	display:block;
+}
+.webos-taskbar-start-user span{
+	padding-left:60px;
+}
+
+.webos-taskbar-menu-container{
+	float:left;
+	display:inline;
+	margin-left:15px;
+}
+/*CSS Code for Menu Begin:*/
+.webos-taskbar-menu {
+	height: 22px;
+	line-height:22px;
+	width:400px;
+}
+.webos-taskbar-menu li {
+	margin: 0;
+	border: 0 none;
+	padding: 0;
+	list-style: none;
+	float:left;
+	position: relative;
+	z-index:400000;
+}
+.webos-taskbar-menu ul {
+	margin: 0;
+	border: 0 none;
+	padding: 0;
+	width: 160px;
+	display: none;
+	position: absolute;
+	top: 22px;
+	left: 0;
+	background: #282826;
+	color: #DDDDDD;
+	z-index:400000;
+}
+.webos-taskbar-menu ul li {
+	float:none;
+	display: block !important;
+	display: inline; /*For IE*/
+}
+/* Root Menu */
+.webos-taskbar-menu a {
+	padding: 0px 10px 0px 10px;
+	float: none !important; /*For Opera*/
+	float: left; /*For IE*/
+	display: block;
+	height: auto !important;
+	height: 1%; /*For IE*/
+	text-align:left;
+}
+/* Root Menu Hover Persistence */
+.webos-taskbar-menu a:hover,
+.webos-taskbar-menu li:hover a{
+	background:url(img/taskbar_menu_background.jpg);
+}
+/* 2nd Menu */
+.webos-taskbar-menu li:hover li a{
+	float: none;
+	background: #EEEEEE;
+	color: #282826;
+}
+/* 2nd Menu Hover Persistence */
+.webos-taskbar-menu li:hover li a:hover,
+.webos-taskbar-menu li:hover li:hover a,
+.webos-taskbar-menu li.iehover li a:hover{
+	background: #DDDDDD;
+	color: #000000;
+	border-right:#BBBBBB 5px solid;
+}
+/* 3rd Menu */
+.webos-taskbar-menu li:hover li:hover li a{
+	background: #EEEEEE;
+	color: #282826;
+}
+/* 3rd Menu Hover Persistence */
+.webos-taskbar-menu li:hover li:hover li a:hover,
+.webos-taskbar-menu li:hover li:hover li:hover a,
+.webos-taskbar-menu li.iehover li.iehover li a:hover{
+	background: #DDDDDD;
+	color: #000000;
+}
+/* 4th Menu */
+.webos-taskbar-menu li:hover li:hover li:hover li a{
+	background: #EEE;
+	color: #666;
+}
+/* 4th Menu Hover */
+.webos-taskbar-menu li:hover li:hover li:hover li a:hover{
+	background: #CCC;
+	color: #FFF;
+}
+.webos-taskbar-menu ul ul,
+.webos-taskbar-menu ul ul ul {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 160px !important;
+	left:80px;
+}
+/* Do Not Move - Must Come Before display:block for Gecko */
+.webos-taskbar-menu li:hover ul ul,
+.webos-taskbar-menu li:hover ul ul ul{
+	display: none;
+}
+.webos-taskbar-menu li:hover ul,
+.webos-taskbar-menu ul li:hover ul,
+.webos-taskbar-menu ul ul li:hover ul{
+	display: block;
+}
+/*taskbar menu end*/
+.webos-taskbar-notification{
+	float:right;
+	display:inline;
+	height:22px;
+	line-height:22px;
+	margin-right:15px;
+	text-align:left;
+}
+.webos-taskbar-notification li{
+	display:inline;
+	float:left;
+	margin-left:10px;
+}
+.webos-taskbar-notification-time{
+	text-align:right;
+}
+.webos-taskbar-notification-seach{
+	cursor:pointer;
+	height:22px;
+	line-height:22px;
+	background:url(img/taskbar_search_normal.jpg) center no-repeat;
+	width:34px;
+}
+.webos-taskbar-notification-seach-active{
+	cursor:pointer;
+	height:22px;
+	line-height:22px;
+	background:url(img/taskbar_search_active.jpg) center no-repeat;
+	width:34px;
+}
+.webos-taskbar-notification-seach-panel{
+	position:absolute;
+	background:#FFFFFF;
+	right:14px;
+	top:22px;
+	width:355px;
+	height:31px;
+	float:none;
+	background:url(img/taskbar_search_background.jpg);
+	line-height:31px;
+	padding:0px 10px;
+	display:none;
+}
+.webos-taskbar-notification-seach-panel-title{
+	width:100px;
+	float:left;
+	color:#FFFFFF;
+	display:inline;
+}
+.webos-taskbar-notification-seach-panel-engine{
+	display:inline;
+	width:70px;
+	float:left;
+	padding:5px 13px 0px 0px;
+	background:url(img/taskbar_search_engine_background.jpg) 70px 0px no-repeat;
+	height:26px;
+}
+.webos-taskbar-notification-seach-panel-engine select{
+	padding:0px;
+	margin:0px;
+	font-size:12px;
+}
+.webos-taskbar-notification-seach-panel-text{
+	display:inline;
+	width:150px;
+	float:left;
+	background:url(img/taskbar_search_text_background.jpg);
+	padding-top:6px;
+	height:25px;
+}
+.webos-taskbar-notification-seach-panel-text input{
+	border:0px none;
+	margin:0px;
+	padding:3px 0px 0px 0px;
+	height:12px;
+	width:150px;
+	line-height:12px;
+}
+.webos-taskbar-notification-seach-panel-button{
+	display:inline;
+	width:22px;
+	float:left;
+}
+.webos-taskbar-notification-seach-panel-button a{
+	display:block;
+	width:22px;
+	height:31px;
+	float:left;
+}
+.webos-taskbar-notification-seach-panel-button a:link,
+.webos-taskbar-notification-seach-panel-button a:visited{
+	background:url(img/taskbar_search_button_normal.jpg);
+}
+.webos-taskbar-notification-seach-panel-button a:hover,
+.webos-taskbar-notification-seach-panel-button a:active{
+	background:url(img/taskbar_search_button_active.jpg);
+}
+
+.webos-taskbar-notification-music-player{
+	cursor:pointer;
+	height:22px;
+	line-height:22px;
+	background:url(img/taskbar_music_player.jpg) center no-repeat;
+	width:95px;
+}
+.webos-taskbar-notification-music-player-active{
+	cursor:pointer;
+	height:22px;
+	line-height:22px;
+	background:url(img/taskbar_music_player_active.jpg) center no-repeat;
+	width:34px;
+}
+
+.webos-taskbar-notification-music-player-panel{
+	position:absolute;
+	background:#FFFFFF;
+	right:14px;
+	top:53px;
+	width:355px;
+	height:250px;
+	float:none;
+	line-height:31px;
+	padding:0px 10px;
+	display:none;
+}

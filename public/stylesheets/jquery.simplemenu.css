@@ -1,0 +1,140 @@
+/*
+ * SimpleMenu - jQuery plugin for creating a simple drop-down menu bar with sub-menus
+ *
+ * Copyright 2009 Pete Morris
+ *
+ * Licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+ *
+ * Version 0.1 2009-08-24
+ *
+ */
+
+ul.simplemenu {
+	/* styles for the entire menubar go here */
+}
+
+ul.simplemenu, ul.simplemenu ul {
+	/* this is to suppress the <ul> whitespace; you probably don't want to change this */
+	padding: 0; margin: 0;
+}
+
+ul.simplemenu li.simplemenu_topitem ul {
+	/* styles for the drop-down/pop-out menus */
+	border: 1px solid black;
+	background: white;
+}
+
+ul.simplemenu li {
+	/* styles for all menu items go here */
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+ul.simplemenu li.simplemenu_topitem {
+	/* styles for the horizontal menu bar items go here */
+	padding-right: 10px;
+}
+
+ul.simplemenu li.simplemenu_topitem ul li {
+	/* styles for the drop-down/pop-out menu items go here */
+}
+
+ul.simplemenu li a {
+	/* styles for the menu item links */
+}
+
+ul.simplemenu li.simplemenu_topitem ul li.simplemenu_hassubmenu {
+	/* styles for menu items with a sub-menu */
+	background: url('./arrow_right.gif') center right no-repeat;
+	padding-right: 10px;
+}
+
+.sub_nav{
+  position:absolute;
+  border-bottom: 1px solid #999;
+  width:770px;
+  z-index: 1;
+}
+/* for all: FF IE6 IE7 */
+.sub_nav{
+height:44px;
+}
+/* for IE6 IE7 */
+*html .sub_nav{
+height:32px;
+}
+/* for IE 7 */
+*+html .sub_nav{
+height:32px;
+}
+
+.sub_nav ul{
+  list-style-image:none;
+  list-style-position:outside;
+  list-style-type:none;
+  overflow:auto;
+  padding-left:2px;
+}
+
+.sub_nav li{
+  float:left;
+  padding: 10px 0 0 2px;
+  background:#FFF;
+}
+.sub_nav li a{
+    background:#F1F1F1 repeat-x scroll 0% 0%;
+    border-color:#898989;
+    border-style:solid;
+    border-width:1px 1px 0pt;
+    color:#333333;
+    display:block;
+    min-width:20px;
+    padding:3px 1em;
+    text-align:center;
+    overflow:hidden;
+}
+.sub_nav li.selected a{
+    background:#6D84B4 none repeat scroll 0% 0%;
+    border-color:#3B5888 rgb(89, 115, 169);
+    border-style:solid;
+    border-width:1px 1px 0pt;
+    color:#FFFFFF;
+    overflow:hidden;
+}
+
+#menu_list li ul{
+    position: absolute;
+    padding:0px;
+    margin:0px;
+    border-top: 1px solid #FFFFFF;
+    border-bottom: 1px solid #000000;
+    overflow:hidden;
+    min-width:40px;
+}
+
+#menu_list li ul li{
+    float:none;
+    display:inline;
+    padding:10px;
+	width:300px;
+}
+
+#menu_list li ul li a:visited{
+    width:200px;
+    background: #FFFF;
+    color: #666666;
+}
+#menu_list li ul li a{
+    width:200px;
+    background: #ffFFFF;
+    color: #666666;
+}
+
+#menu_list li ul li a:hover{
+    background: #39598c;
+    color:#FFFFFF;
+}
+
+
