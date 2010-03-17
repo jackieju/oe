@@ -3,16 +3,27 @@ class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
   attr_accessor :password
 
-  validates_presence_of     :login, :email
+  #validates_presence_of     :login, :email
+  validates_presence_of     :login, :email, :if => :not_openid?
+  validates_length_of       :login,    :within => 3..40, :if => :not_openid?
+  validates_length_of       :email,    :within => 3..100, :if => :not_openid?
   validates_presence_of     :password,                   :if => :password_required?
   validates_presence_of     :password_confirmation,      :if => :password_required?
   validates_length_of       :password, :within => 4..40, :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
-  validates_length_of       :login,    :within => 3..40
-  validates_length_of       :email,    :within => 3..100
-  validates_uniqueness_of   :login, :email, :case_sensitive => false
+  #validates_length_of       :login,    :within => 3..40
+  #validates_length_of       :email,    :within => 3..100
+  #validates_uniqueness_of   :login, :email, :case_sensitive => false
+  validates_uniqueness_of   :login, :case_sensitive => false
   before_save :encrypt_password
-
+  
+ # def find_or_create_by_identity_url(url)
+   #  if u= self.find_by_identity_url(url)
+      #  u
+      #   else
+      #     u = User.new(url).save!
+      #   end
+      # end
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
     u = find_by_login(login) # need to get the salt
@@ -49,7 +60,7 @@ class User < ActiveRecord::Base
     self.remember_token            = nil
     save(false)
   end
-
+ 
   protected
     # before filter 
     def encrypt_password
@@ -58,7 +69,14 @@ class User < ActiveRecord::Base
       self.crypted_password = encrypt(password)
     end
     
-    def password_required?
-      crypted_password.blank? || !password.blank?
+   # def password_required?
+   #   crypted_password.blank? || !password.blank?
+   # end
+   def password_required?
+       not_openid? && (crypted_password.blank? or not password.blank?)
+     end  
+    def not_openid?
+      identity_url.blank?
     end
+   
 end

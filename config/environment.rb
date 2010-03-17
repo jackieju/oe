@@ -52,3 +52,6 @@ require 'jcode'
 ENV['LANG'] = 'zh_CN.UTF-8'
 ENV['LC_TIME'] = 'C'
 require 'acts_as_ferret'
+
+
+OpenIdAuthentication.store = :file

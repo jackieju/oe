@@ -18,6 +18,7 @@
 -->
 <hr>
 <% form_tag do -%>
+<div id="login" style="float:left;">
 <table>
 <tr>
 	<td><label for="login" >用户名</label></td>
@@ -33,7 +34,21 @@
 -->
 
 <tr><td><%= submit_tag 'Log in' %> </td><td><a href="/account/signup">注册</a></td></tr>
+
 </table>
+</div>
+	<!-- start of openid login -->
+	
+<div id="openid_login" style="position:">
+<p> use OpenID ... </p>
+<p> <%= text_field_tag "openid_url",  '',:size =>50 %> </p>
+<p><%= submit_tag 'Log in' %></p>
+
+
+
+
+</div>
+	<!-- end of openid login -->
 <% end -%>
 <hr>
 <%= stylesheet_link_tag 'styles' %>
@@ -82,6 +97,36 @@
 	</div>	
 	<img src="/images/close_icon.png" alt="delete" class="jqmClose" ></img>
 </div>
+<div id="ex3c2" class="jqmNotice jqDrag" style="position:relatvie;left:720px;width:390px;" onclick="activate(this);return false;">
+	<div class="jqmnTitle jqDrag" style="overflow:hidden;cursor:pointer;">
+		<h1 style="font-size:6pt;overflow:hidden;background:#FFFFCC;color:black;">2010-3-17</h1>
+	</div>
+	<div class="jqmnContent" style="width:390px;height:auto;overflow:hidden;" >
+    添加openid登录
+	<div style="float:left;margin:20px;border:0px solid red;">
+
+			<p style="font-size:10pt;">You can sign in openid by your account in following:</p>
+
+			<div style="float:left;width:120px;margin:20px;overflow:hidden;font-size:10pt;word-wrap:break-word;">
+				<div style="height:50px;">
+					<a href="http://google.com/profiles/me">
+						<img src="http://openid.net/images/get-logos/google.png" alt="Google" style="border:0px;" /></a>
+				</div>
+					<br>
+					Use your&nbsp;<a href="http://google.com/profiles/me" style="">Google Profile URL</a>.e.g. http://www.google.com/profiles/xxxx
+			</div>
+
+			<div style="float:left;width:120px;margin:20px;overflow:hidden;font-size:10pt;word-wrap:break-word;">
+				<div style="height:50px;">	<a href="http://yahoo.com/">
+					<img src="http://openid.net/wp-content/uploads/2009/11/yahoo.png" alt="Google" style="border:0px;" /></a>
+				</div>
+				<br>
+				Type "yahoo.com" in openid text-box. you may need to enable yahoo open id first at <a href="http://openid.yahoo.com" style="">http://openid.yahoo.com</a>.
+			</div>	
+	</div>
+	</div>	
+	<img src="/images/close_icon.png" alt="delete" class="jqmClose" ></img>
+</div>
 <script>
 	$('#ex3c').jqDrag('.jqDrag', null);
 	$('#ex3c').jqm({
@@ -92,6 +137,12 @@
 	$('#ex3c1').jqDrag('.jqDrag', null);
 	$('#ex3c1').jqm({
 		overlay: 0
-	});
+	});	
 	$('#ex3c1').jqmShow();
+	
+	$('#ex3c2').jqDrag('.jqDrag', null);
+	$('#ex3c2').jqm({
+		overlay: 0
+	});
+	$('#ex3c2').jqmShow();
 </script>
