@@ -370,14 +370,15 @@ function fs() // full screen app
 	</a>
 	</td>
 	<td>-->
+			<% getAppList(current_user.id)%>
 	<div class="webos-dock-container" id="webosDockContainer">
 		<a class="webos-dock-item" href="javascript:void(0)" id="webosWidgetPictureDock" onclick="showSysMenu()">
-			<span style="display: none;">Applications</span>
+			<span style="display: none;">Applications(<%=apps.size.to_s%>)</span>
 			<img src="images/Setting-icon.png" alt="Picture"  id="webosWidgetPictureDockImage" />
 		</a>
 	
-		<% getAppList(current_user.id)%>
-		<%=apps.size.to_s%>
+	
+		
 		<% for app in apps%>
 		
 		<a  class="webos-dock-item" style="margin-left:8px;" href="javascript:void(0)" id="webosWidgetPictureDock" onclick="openapp('<%=app['appurl']%>')">

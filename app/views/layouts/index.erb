@@ -105,7 +105,26 @@ function delDoc(id, title){
     $("#status p").html('Delete...');
 }
 
+function logit(){
+$('#logit').jqmShow();
+}
 
+var g_menu_list1 = 0;
+function showCreateMenu(t){
+	// if (t.nodeName == 'div' || t.nodeName == "DIV")
+	// 	return;
+	
+	if (g_menu_list1==0){
+		$('#menu_list1').jqmShow();
+		g_menu_list1 = 1;
+	}
+}
+function hideCreateMenu(){
+	if (g_menu_list1==1){
+		$('#menu_list1').jqmHide();	
+		g_menu_list1 = 0;
+	}
+}
 </script>
 
 
@@ -118,13 +137,38 @@ function delDoc(id, title){
 
 <div id="dlg" class="jqmWindow" style="width:auto;">
 </div>
-
+<div id="logit" class="jqmWindow" style="width:430px;padding:10px;" >
+	<p>Please input url of the web page:</p>
+	<form action="/editor/logit" metho="post">
+ 	<input id="url" name="url" size="50" value="" >&nbsp;</input><input type="submit" value="OK" style="background:transparent;color:blue;cursor:pointer;border:0px solid blue;font-size:10pt;">
+	</form>
+</div>
 
 
 
 	<div id="left" style="position:relative;float:left;width:150px;">
 		<div style="margin-left:10px;margin-top:20px;line-height:20pt;">
-			<a href="/editor/create"><img src="/images/create.gif" style="height:24px;border-width:0px;" />&nbsp;创建</a><br>
+		<!--
+			<ul  class="" id="menu_list1" style="float:none;margin:0px;height:0px;" >
+				<li style="float:none;margin:0px;">	
+					<a href="/editor/create"><img src="/images/create.gif" style="height:24px;border-width:0px;" />&nbsp;创建</a>
+					<ul style="width:70px;margin-left:60px;margin-top:-5px;border:1px solid #aaccee;padding:2px;">
+					<li><a href="/editor/create"  >文档</a><br></li>
+					<li><a href="javascript:void(0);" onclick="logit();">网摘</a><br></li>
+					</ul>
+				</li>
+			</ul>-->
+
+			<div  onmouseout="hideCreateMenu();" onmouseover="showCreateMenu(this);" style="width:70px;border:0px solid grey;">
+			<a href="/editor/create" ><img src="/images/create.gif" style="height:24px;border-width:0px;" />&nbsp;创建</a>
+			<div id="menu_list1" class="jqmWindow" style="position:absolute;padding:0px;margin:0px;background:transparent;border:0px;width:auto;">
+					<ul  style="list-style-image:none;list-style-position:outside;list-style-type:none;width:70px;margin-left:0px;margin-top:0px;border-top:1px solid #aaccee;border-left:1px solid #aaccee;border-right:2px outset #aaccee;border-bottom:2px outset #aaccee;padding:2px;">
+					<li ><a href="/editor/create"  >文档</a><br></li>
+					<li><a href="javascript:void(0);" onclick="logit();">网摘</a><br></li>
+					</ul>
+			</div>
+			<br>
+			</div>
 			<a href="javascript:void(0);" onclick="showDoc(0);"><img src="/images/open.gif" style="height:24px;border-width:0px;" />&nbsp;Open</a><br>
 			<a href="javascript:void(0);" onclick="showMemo();" title="Ctrl-F11"><img src="/images/coffee.gif" style="height:24px;border-width:0px;" />&nbsp;灵感</a><br>
 			<a href="javascript:void(0);" onclick="showMiddle('/publishes/list/1', 0);" title=""><img src="/images/publish.gif" style="height:24px;border-width:0px;" />&nbsp;文坛动态</a><br>
@@ -182,6 +226,7 @@ function delDoc(id, title){
 <script>
 $('#err_dlg').jqm({});
 $('#dlg').jqm();
+$('#logit').jqm();
 $('#game').jqm({overlay:50,toTop:true});
 $().keydown(function(e){
 	if (e.keyCode==122) {
@@ -191,6 +236,8 @@ $().keydown(function(e){
 			hideMemo();
 	};
 });
+//$('#menu_list1').simplemenu({allowMouseover : true});
+$('#menu_list1').jqm({overlay:0});
 
 </script>
 </html>

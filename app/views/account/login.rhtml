@@ -18,7 +18,7 @@
 -->
 <hr>
 <% form_tag do -%>
-<div id="login" style="float:left;">
+<div id="login" style="float:left;border-right:0px solid #aaccdd;padding-right:5px;margin-right:5px;background:transparent url(/images/separateline.gif) no-repeat scroll 100% 5%;">
 <table>
 <tr>
 	<td><label for="login" >用户名</label></td>
@@ -39,12 +39,19 @@
 </div>
 	<!-- start of openid login -->
 	
-<div id="openid_login" style="position:">
-<p> use OpenID ... </p>
-<p> <%= text_field_tag "openid_url",  '',:size =>50 %> </p>
-<p><%= submit_tag 'Log in' %></p>
+<div id="openid_login" style="border:0px solid blue;">
 
-
+<table>
+<tr>
+	<td> Or use OpenID ... </td>
+</tr>
+<tr>
+	<td> <%= text_field_tag "openid_url",  '',:size =>38 %> </td>
+	</tr>
+<tr>
+	<td><%= submit_tag 'Log in' %></td>
+	</tr>
+</table>
 
 
 </div>
@@ -103,21 +110,19 @@
 	</div>
 	<div class="jqmnContent" style="width:390px;height:auto;overflow:hidden;" >
     添加openid登录
-	<div style="float:left;margin:20px;border:0px solid red;">
-
-			<p style="font-size:10pt;">You can sign in openid by your account in following:</p>
-
+	<div style="margin:0px;border:0px solid red;">
+		You can sign in openid by your account in following:<br>
 			<div style="float:left;width:120px;margin:20px;overflow:hidden;font-size:10pt;word-wrap:break-word;">
 				<div style="height:50px;">
 					<a href="http://google.com/profiles/me">
 						<img src="http://openid.net/images/get-logos/google.png" alt="Google" style="border:0px;" /></a>
 				</div>
-					<br>
+				<br>
 					Use your&nbsp;<a href="http://google.com/profiles/me" style="">Google Profile URL</a>.e.g. http://www.google.com/profiles/xxxx
 			</div>
 
-			<div style="float:left;width:120px;margin:20px;overflow:hidden;font-size:10pt;word-wrap:break-word;">
-				<div style="height:50px;">	<a href="http://yahoo.com/">
+			<div style="float:left;width:130px;margin:20px;overflow:hidden;font-size:10pt;word-wrap:break-word;">
+				<div style="height:30px;">	<a href="http://yahoo.com/">
 					<img src="http://openid.net/wp-content/uploads/2009/11/yahoo.png" alt="Google" style="border:0px;" /></a>
 				</div>
 				<br>
