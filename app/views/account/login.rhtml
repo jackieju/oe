@@ -104,6 +104,7 @@
 	</div>	
 	<img src="/images/close_icon.png" alt="delete" class="jqmClose" ></img>
 </div>
+
 <div id="ex3c2" class="jqmNotice jqDrag" style="position:relatvie;left:720px;width:390px;" onclick="activate(this);return false;">
 	<div class="jqmnTitle jqDrag" style="overflow:hidden;cursor:pointer;">
 		<h1 style="font-size:6pt;overflow:hidden;background:#FFFFCC;color:black;">2010-3-17</h1>
@@ -132,6 +133,16 @@
 	</div>	
 	<img src="/images/close_icon.png" alt="delete" class="jqmClose" ></img>
 </div>
+<div id="ex3c3" class="jqmNotice jqDrag" style="position:relative;left:0px;top:60px;" onclick="activate(this);return false;">
+	<div class="jqmnTitle jqDrag" style="overflow:hidden;cursor:pointer;">
+		<h1 style="font-size:6pt;overflow:hidden;background:#FFFFCC;color:black;">2010-04-13</h1>
+	</div>
+	<div class="jqmnContent" style="width:auto;height:auto;overflow:hidden;" >
+    添加书签/网摘	
+	
+	</div>	
+	<img src="/images/close_icon.png" alt="delete" class="jqmClose" ></img>
+</div>
 <script>
 	$('#ex3c').jqDrag('.jqDrag', null);
 	$('#ex3c').jqm({
@@ -150,4 +161,10 @@
 		overlay: 0
 	});
 	$('#ex3c2').jqmShow();
+		
+	$('#ex3c3').jqDrag('.jqDrag', null);
+	$('#ex3c3').jqm({
+		overlay: 0
+	});
+	$('#ex3c3').jqmShow();
 </script>
