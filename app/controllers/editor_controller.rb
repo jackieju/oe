@@ -250,11 +250,11 @@ end
       m = title_re.match(content)
       print "\n---------->title:#{m}"
       if (m)
-        title = m[1].gsub(/[\/|\\*\(\)?\[\];:'\",\.]/,"")
+        title = m[1].gsub(/[\/|\\*\(\)?\[\];:'\",\.]/,"").gsub(/^[\s]+/, "").gsub(/[\s]+$/, "")
       else
         title = ""
       end
-         print "\n---------->content0:#{content}"
+       #  print "\n---------->content0:#{content}"
       content_re = /<body(.*?)>(.*)<\/body>/xmi
       m = content_re.match(content)     
       if m
