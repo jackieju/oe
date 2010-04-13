@@ -1,0 +1,18 @@
+** Daemonized, any open files are closed.  Look at tmp/pids/mongrel.6012.pid and log/mongrel.6012.log for info.
+** Starting Mongrel listening at 0.0.0.0:6012
+** Starting Rails with production environment...
+/var/www/oe/app/models/publish.rb:133: warning: don't put space before argument parentheses
+/usr/local/lib/ruby/gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:443:in `load_missing_constant': uninitialized constant OpenIdAuthentication (NameError)
+	from /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:80:in `const_missing'
+	from /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.3.2/lib/active_support/dependencies.rb:92:in `const_missing'
+	from /var/www/oe/config/environment.rb:57
+	from /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+	from /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+	from /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:147:in `rails'
+	from /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:113:in `cloaker_'
+	from /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/configurator.rb:149:in `call'
+	 ... 6 levels...
+	from /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/command.rb:212:in `run'
+	from /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:281
+	from /usr/local/bin/mongrel_rails:19:in `load'
+	from /usr/local/bin/mongrel_rails:19
