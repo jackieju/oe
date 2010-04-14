@@ -1,7 +1,7 @@
 <div style="margin:2px;">
 <div style="float:left;">您的大作: </div>
 <div style="float:left;margin-left:7px;">
-	<form action="/?">
+	<form action="/editor/index?">
 	<input name="search" style="border:1px solid blue;width:70pt;"><input type="submit" value="search"/>
 	</form>
 </div>
@@ -22,7 +22,8 @@ function leaveline(t){
 <table  class="post_list" style="table-layout:fixed;" width="100%">
 <tr><td style="">标题</td><td>最后更新</td><td>创建</td></tr>
 	<% for doc in @doc_list %>
-	<tr><td class="post_title" style="white-space:nowrap;overflow:hidden;word-break:break-all;" ><div style="width:300px;overflow:hidden;" nowrap><a href="/editor/index?docid=<%=doc[:id]%>" 
+	<tr><td class="post_title" style="white-space:nowrap;overflow:hidden;word-break:break-all;" ><div style="width:300px;overflow:hidden;" nowrap>
+		<a href="/editor/index?docid=<%=doc[:id]%>" 
 		title="<% if doc[:title] %>
 				<%=doc[:title]%> 
 			<% end %>
