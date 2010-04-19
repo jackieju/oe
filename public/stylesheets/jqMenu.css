@@ -1,0 +1,16 @@
+.jqmMenu{
+display:none;position:absolute;padding:0px;margin:0px;background:transparent;border:0px;width:auto;
+}
+
+/* IE 6 */
+*html .jqmMenu{
+	top: 22px;
+	left: 70px;
+}
+
+/* IE 7 */
+*+HTML .jqmMenu{
+	top: 22px;
+	left: 70px;
+}
+
