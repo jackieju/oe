@@ -202,6 +202,20 @@ end
       end.tr(' ', '+')
     end
 
+	def getTitle( content)
+	 title_re = /<title>(.*)?<\/title>/mi
+
+      m = title_re.match(content)
+      print "\n---------->title:#{m}"
+      if (m)
+        title = m[1].gsub(/[\/|\\*\(\)?\[\];:'\",\.]/,"").gsub(/^[\s]+/, "").gsub(/[\s]+$/, "")
+      else
+        title = ""
+      end
+
+		return title
+	end
+
     def getPage(url, limit)
       url = esc(url)
       print "--------------------------------->url1:#{url}\n"
@@ -239,21 +253,30 @@ end
     else
       encode = "utf-8"
     end
-      print "---->charset="+encode+"\n"
+      logger.info  "---->charset="+encode+"\n"
       if  not (encode =~ /~utf-8$/i)
+begin
         content =	Iconv.conv('utf-8', encode, content)
+rescue Exception=>e
+	logger.info e
+	title = getTitle (content)
+	if (title)
+		begin
+			title = Iconv.conv('utf-8', encode, title)
+		rescue Exception=>ee
+			logger.info e
+			title = "Cannot get title"
+		end
+	else
+		title = "Cannot get title"
+	end
+	content = "Cannot get content"
+end
       end
      # print "------>content_type:"+content.type_params[:charset]+"\n"
-      print "\n"
-      title_re = /<title>(.*)?<\/title>/mi
-      
-      m = title_re.match(content)
-      print "\n---------->title:#{m}"
-      if (m)
-        title = m[1].gsub(/[\/|\\*\(\)?\[\];:'\",\.]/,"").gsub(/^[\s]+/, "").gsub(/[\s]+$/, "")
-      else
-        title = ""
-      end
+     # print "\n"
+	title = getTitle(content) if !title
+	
        #  print "\n---------->content0:#{content}"
       content_re = /<body(.*?)>(.*)<\/body>/xmi
       m = content_re.match(content)     
