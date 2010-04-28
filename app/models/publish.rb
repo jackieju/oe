@@ -124,10 +124,10 @@ MESSAGE_END
        sg = "<br>
        <div class='code' style='background:#ffddcc;text-align:right;'>This article is created by <a href='http://oe.monweb.cn' >开心写作网</a>"
        
-       if (publish_target_list)
+       if (publish_target_list && publish_target_list.size>0)
          sg +="
        <div style=\"margin-left:68%;backgroud:transparent;\">
-       该文已同时发布到1<br>
+       该文已同时发布到<br>
        #{ptl}
        </div>"
        end
