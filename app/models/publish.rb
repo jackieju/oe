@@ -67,7 +67,7 @@ MESSAGE_END
             :uid=>current_user[:id],
             :username=>current_user.login,
             :docid=>docid,
-            :to=>"CSDN",
+            :target=>"CSDN",
             :doctitle=>@doc[:title],
              :permalink=>permalink
           }).save!
@@ -111,8 +111,29 @@ MESSAGE_END
        
        client = MetaWebLogAPI::Client.new(host, path, '11', username, pwd)
        logger.info("host:#{host}, path:#{path}")
-      
-       sg = "<br><div class='code' style='background:#ffddcc;text-align:right;'>This article is created by <a href='http://oe.monweb.cn' >开心写作网</a></div>"
+      publish_target_list = Publish.find_by_sql("select id,target,permalink from publishes where docid=#{docid} group by target")
+      ptl=""
+       #print "====>2="+publish_target_list[1][:target]+"\n"
+       if publish_target_list 
+      for r in (0..publish_target_list.size-1) do
+        print "===>112#{publish_target_list[r][:target].to_s}"
+        ptl += "<a href=\"#{publish_target_list[r][:permalink].to_s}\" >#{publish_target_list[r][:target].to_s} </a><br>"
+      end
+    end
+      print "====>11="+ptl
+       sg = "<br>
+       <div class='code' style='background:#ffddcc;text-align:right;'>This article is created by <a href='http://oe.monweb.cn' >开心写作网</a>"
+       
+       if (publish_target_list)
+         sg +="
+       <div style=\"margin-left:68%;backgroud:transparent;\">
+       该文已同时发布到1<br>
+       #{ptl}
+       </div>"
+       end
+       sg +="
+       </div>
+       "
        blogpost = {
          'title' => @doc[:title],
          'description' => @doc[:content]+sg,
@@ -140,7 +161,7 @@ MESSAGE_END
            :uid=>current_user[:id],
            :username=>current_user.login,
            :docid=>docid,
-           :to=>host,
+           :target=>host,
            :doctitle=>@doc[:title],
            :permalink=>permalink
          }).save!

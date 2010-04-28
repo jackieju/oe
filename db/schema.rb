@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100316222609) do
+ActiveRecord::Schema.define(:version => 20100428074312) do
 
   create_table "apps", :force => true do |t|
     t.integer  "creator"
@@ -61,9 +61,9 @@ ActiveRecord::Schema.define(:version => 20100316222609) do
   end
 
   create_table "open_id_authentication_nonces", :force => true do |t|
-    t.integer "timestamp",                  :null => false
+    t.integer "timestamp",  :null => false
     t.string  "server_url"
-    t.string  "salt",       :default => "", :null => false
+    t.string  "salt",       :null => false
   end
 
   create_table "publishes", :force => true do |t|
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(:version => 20100316222609) do
     t.string   "username"
     t.integer  "docid"
     t.string   "doctitle"
-    t.string   "to"
+    t.string   "target"
     t.string   "permalink"
     t.datetime "created_at"
     t.datetime "updated_at"
