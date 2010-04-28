@@ -19,8 +19,8 @@ function leaveline(t){
 </script>
 <% if @doc_list %>
 <div style="height:360px;">
-<table  class="post_list" style="table-layout:fixed;" width="100%">
-<tr><td style="">标题</td><td>最后更新</td><td>创建</td></tr>
+<table  border="0" class="post_list" style="table-layout:fixed;" width="100%">
+<tr class="title"><td style="text-align:left;width:300px;">标题</td><td style="width:50px;text-align:left;">类型</td><td style="width:150px;">最后更新</td><td style="width:150px;">创建</td></tr>
 	<% for doc in @doc_list %>
 	<tr><td class="post_title" style="white-space:nowrap;overflow:hidden;word-break:break-all;" ><div style="width:300px;overflow:hidden;" nowrap>
 		<a href="/editor/index?docid=<%=doc[:id]%>" 
@@ -34,10 +34,19 @@ function leaveline(t){
 			[无标题]
 		<% end %>
 		</a></div></td>
-		<td>
+			<td style="font-size:9pt;color:grey;">
+		<% if doc[:doctype] == 1 
+			 %>
+			<img src="/images/doc.png" title="<%="文档" %>" width=20 />
+			<% elsif doc[:doctype] == 2 %>
+				<img src="/images/bookmark.jpg" title="<%='网摘'%>" width=20 />
+		
+			<% end %>
+		</td>
+		<td nowrap class="post_list_time">
 		<%=doc[:updated_at].strftime('%Y-%m-%d %H:%m:%S') %>
 		</td>
-		<td>
+		<td nowrap  class="post_list_time">
 			<%=doc[:created_at].strftime('%Y-%m-%d %H:%m:%S') %>
 		</td>
 		<td style="text-align:center;width:50px;">

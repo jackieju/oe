@@ -26,3 +26,11 @@ input{
 	border-width:1px;
 
 }
+
+.post_list_time {
+	font-size: 9pt;
+	color:grey;
+}
+table.post_list tr.title{
+	text-align:center;
+}

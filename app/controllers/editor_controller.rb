@@ -299,7 +299,7 @@ end
       doc = Doc.new({
       :uid=>current_user[:id],
       :title=>title,
-      :doctype=>1, 
+      :doctype=>2, #type: bookmark 
       :prop=>'',
       :tags=>''
       })

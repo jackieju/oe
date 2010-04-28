@@ -379,31 +379,7 @@ $('#MetaWebLogPub').jqm();
 <% end %>
 您的大作:
 
-<% if @doc_list %>
-<table class="post_list" style="table-layout:fixed">
-<tr><b><td style="min-width:200px;">标题</td><td>最后更新</td><td>创建</td></b></tr>
-	<% for doc in @doc_list %>
-	<tr><td class="post_title"><a href="/editor/index?docid=<%=doc[:id]%>" >
-		<% if doc[:title] && doc[:title].size >0 %>
-			<%=doc[:title]%>
-			<% else %>
-			[无标题]
-		<% end %>
-		</a></td>
-		<td>
-		<%=doc[:updated_at].strftime('%Y-%m-%d %H:%m:%S') %>
-		</td>
-		<td>
-			<%=doc[:created_at].strftime('%Y-%m-%d %H:%m:%S') %>
-		</td>
-		<td style="text-align:center;width:50px;">
-		<a href="javascript:void(0)" onclick="delDoc(<%=doc[:id]%>)"> <img src="/images/delete.gif" style="border-width:0px;width:12px;"/></a>
-		</td>
-	</tr>
-	<%end%>
-</table>
-<div id="pager"></div>
-<% end %>
+
 <% end %>
 <script>
 //$(g_fckeditor.EditorDocument).height("1000px");
