@@ -1,6 +1,7 @@
 class MemosController < ApplicationController
   # GET /memos
   # GET /memos.xml
+   before_filter :login_required 
   def index
     @memos = Memo.find_by_sql("select * from memos where uid=#{current_user[:id]}")
     if !@memos || @memos.size ==0
@@ -43,6 +44,10 @@ class MemosController < ApplicationController
   
   def save
     logger.info("->>>>>>save")
+    if (params[:memoid] == "dummy")
+      render :text=>"Memo saved at #{DateTime.now}"
+      return 
+    end
     id = params[:memoid]
     content = params[:content]
     memo = Memo.find(id)
