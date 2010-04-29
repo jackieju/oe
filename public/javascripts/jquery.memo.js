@@ -14,12 +14,12 @@ function hideMemo(){
 
 function showMemo(){
 //alert("/memos?t="+ new Date().getTime());
-alert("1");
+
 	 if (hasMemo == 1){
 		hideMemo();
 			return;
 	}
-	alert("1");
+
 	$.ajax({
 			type: "get",
 			url: "/memos?t="+ new Date().getTime(),
@@ -37,7 +37,7 @@ alert("1");
 				alert("error"+errorThrow+","+textStatus+","+xhr.responseText);
 			}
 	});	
-alert("1");
+
 }
 
 
