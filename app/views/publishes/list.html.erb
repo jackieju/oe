@@ -6,12 +6,12 @@
 <div class="action">
 	<%=act[:username]%>在
 	<a href="
-	<% if act[:to]== 'CSDN'%>
+	<% if act[:target]== 'CSDN'%>
 		http://www.csdn.net
 	<% else %>
-	http://<%=act[:to]%>
+	http://<%=act[:target]%>
 	<% end %>
-	"><%=act[:to]%></a>上发布了大作
+	"><%=act[:target]%></a>上发布了大作
 	
 		<% 
 		if !act[:doctitle] || act[:doctitle].size == 0
@@ -39,7 +39,7 @@
 
 	<% if act[:permalink] && act[:permalink].size>0 %>
 		<a target="_blank" href="<%=act[:permalink]%>" >
-			<span style="color:#66cc66;"><%=title %><span>
+			<span style="color:#66cc66;"><%=title %></span>
 		</a>
 	<% else %>
 		<span style="color:#eeee99;"><%=title %></span>
