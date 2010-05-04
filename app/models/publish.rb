@@ -4,7 +4,30 @@ class Publish < ActiveRecord::Base
   
   
   class << self
-      def send_email(from, from_alias, to, to_alias, subject, message)
+      def send_email(current_user, from, from_alias, to, to_alias, subject, message, docid)
+ publish_target_list = Publish.find_by_sql("select id,target,permalink from publishes where docid=#{docid} group by target")
+      ptl=""
+       #print "====>2="+publish_target_list[1][:target]+"\n"
+       if publish_target_list
+      for r in (0..publish_target_list.size-1) do
+        print "===>112#{publish_target_list[r][:target].to_s}"
+        ptl += "<a href=\"#{publish_target_list[r][:permalink].to_s}\" >#{publish_target_list[r][:target].to_s} </a><br>"
+      end
+    end
+
+		sg = ""
+		if docid
+	if (publish_target_list && publish_target_list.size>0)
+         sg ="
+       <div style=\"margin-left:68%;backgroud:transparent;\">
+       该文已同时发布到<br>
+       #{ptl}
+       </div>"
+       end
+	
+		end
+		footer = "<br><div class='code' style=\"background:#ffddcc;text-align:right;\">This article is created by <a href=\"http://oe.monweb.cn\" >开心写作网</a>#{sg}</div>"
+
         #	msg = "#{message}"
         _sub = Base64.b64encode(subject).gsub("\n","").gsub("\r","")
         logger.info("subject:#{_sub};")
@@ -16,7 +39,7 @@ Content-type: text/html;charset=utf-8
 Subject:=?UTF-8?B?#{_sub.rstrip}?=
 
 #{message}
-<br><div class='code' style="background:#ffddcc;text-align:right;">This article is created by <a href="http://oe.monweb.cn" >开心写作网</a></div>
+#{footer}
 MESSAGE_END
 
         #	m =	Iconv.conv('utf-8', 'iso-8859-1', msg)
@@ -25,6 +48,17 @@ MESSAGE_END
         Net::SMTP.start('localhost') do |smtp|
           smtp.send_message msg, from, to
         end
+
+host = to.sub(/.*@/, "")
+Publish.new({
+           :uid=>current_user[:id],
+           :username=>current_user.login,
+           :docid=>docid,
+           :target=>host,
+           :doctitle=>subject,
+           :permalink=>""
+         }).save!
+
       end
       
   def pub_to_csdn(current_user, docid, username, pwd)
@@ -175,7 +209,7 @@ MESSAGE_END
      save_email(current_user[:id],from, to)
      @doc[:content] = @doc.loadContent()
      begin
-       Publish.send_email(from, current_user.login, to, to, @doc[:title], @doc[:content])
+       Publish.send_email(current_user,from, current_user.login, to, to, @doc[:title], @doc[:content], docid)
      rescue Exception=>e
       # render :text=>"<script>showErrDlg('Email发送失败')</script>"
       logger.error e.inspect
