@@ -124,6 +124,8 @@ function toggleAutoSave(){
 
 var fsMode = 0;
 function fullScreen(){
+   // a = $("#app_frame").data("a");
+	//if (a == undefined) { a = 0;};
 	if (fsMode == 1){
 			$('#left').css('display', 'block');
 			$('#right').css('display', 'block');
@@ -139,8 +141,11 @@ function fullScreen(){
 		$('#header').css('display', 'none');
 		$('#footer').css('display', 'none');
 		$('#middle').width("100%");
-		$('#middle').height("570px");
-		$('#middle iframe').height("500px");
+		//if (a == 1) {// app_frame is fullscreen
+			//$('#middle').height("410px");
+//		}else{
+			//$('#middle').height("450px");
+	//	}
 		fsMode = 1;
 	}
 	/*$(g_fckeditor.EditorDocument).width("1000");
