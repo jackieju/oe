@@ -12,11 +12,11 @@ class Doc < ActiveRecord::Base
  # GENERIC_ANALYSIS_REGEX = /([a-zA-Z]|[\\xc0-\xdf][\\x80-\\xbf])+|[0-9]+|[\\xe0-\\xef][\\x80-\\xbf][\\x80-\\xbf]/
   #GENERIC_ANALYZER = Ferret::Analysis::RegExpAnalyzer.new(GENERIC_ANALYSIS_REGEX, true)
 	# use reuglar exp
-    aaa = Ferret::Analysis::RegExpAnalyzer.new(/[a-zA-Z]+|[0-9]+|[\xe0-\xef][\x80-\xbf][\x80-\xbf]/, true)
+  #  aaa = Ferret::Analysis::RegExpAnalyzer.new(/[a-zA-Z]+|[0-9]+|[\xe0-\xef][\x80-\xbf][\x80-\xbf]/, true)
     #acts_as_ferret ({:remote=>true, :fields=>[:title, :content], :analyzer => aaa}) #:analyzer =>GENERIC_ANALYZER#,  :analyzer => analyzer  # , :analyzer =>GENERIC_ANALYZER
 	
    # use rmmseg
- bbb = Ferret::Analysis::RegExpAnalyzer.new(/[a-zA-Z]+/,true)
+# bbb = Ferret::Analysis::RegExpAnalyzer.new(/[a-zA-Z]+/,true)
 #   acts_as_ferret ({ :remote=>true, :fields=>[:title, :content], :ferret=>{:analyzer => bbb} })
    acts_as_ferret  :remote=>true, :fields=>[:title, :content, :uid], :ferret=>{:analyzer => ranalyzer}
   #{:title => {:store => :yes}}

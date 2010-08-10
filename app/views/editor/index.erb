@@ -138,7 +138,7 @@ function fullScreen(){
 		$('#right').css('display', 'none');
 		$('#header').css('display', 'none');
 		$('#footer').css('display', 'none');
-		$('#middle').width("1000px");
+		$('#middle').width("100%");
 		$('#middle').height("570px");
 		$('#middle iframe').height("500px");
 		fsMode = 1;
@@ -329,7 +329,7 @@ function autopub(){
 
 <% if @doc %>
 <div id="status" style="text-align:center;font-size:8pt;">
-	<p >Just loaded</p>
+	<p style="margin-top:0px;">Just loaded</p>
 </div>
 <form id="docform">
 	<input type="hidden" id="docid" value="<%=@doc[:id] %> "></input>
