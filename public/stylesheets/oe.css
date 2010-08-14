@@ -1,0 +1,13 @@
+.used_tag{
+   background:#eeeeee;
+	margin:2px;
+	border:1px solid #dddddd;
+	border-style:inset;
+	padding:2px;
+}
+.tag{
+
+	background:#ffffff;
+	margin:3px;
+	padding:2px;
+}

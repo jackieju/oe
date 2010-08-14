@@ -279,6 +279,31 @@ function pub(dest){
 function autopub(){
 	params={};
 	showDlg("/pubsets", params)
+}javascript:void(0)
+
+function showtag(t){
+//	alert(""+$("#tagbt").offset().left);
+	$('#tags_pad').jqmShow();
+//	$('#tags_pad').attr("top", $("#tagbt").offset().top-10);
+//	$('#tags_pad').attr("left", $("#tagbt").offset().left);
+//	$('#tags_pad')。offset().left =$("#tagbt").offset().left);
+//	$('#tags_pad').css("offetleft", $("#tagbt").offset().left+"px");
+//	$('#tags_pad').css("offettop", $("#tagbt").offset().top+"px");
+//	alert(""+$('#tags_pad').offset().left);
+	t.stopPropagation();
+	return false;
+}
+function hidetags(t){
+	if ( $(t.target).attr("id") == "tags_pad")
+ 		$('#tags_pad').jqmHide();
+	t.stopPropagation();
+	return false;
+}
+function click_tag(t){
+	if($(t).parent().hasClass("tag"))
+		$(t).parent().removeClass("tag").addClass("used_tag");
+		else
+			$(t).parent().removeClass("used_tag").addClass("tag");
 }
 
 </script>
@@ -317,6 +342,7 @@ function autopub(){
 	<div class="jqmnTitle jqDrag" style="margin:0px;padding:0px 5px;overflow:hidden;cursor:pointer;width:100%;border-width:0px;">
 		发布到kaixin
 	</div>
+
 <!--
 	<form method="get" action="http://www.kaixin001.com/diary/write.php">
 		<input name="title" value="aaa" type=hidden />
@@ -336,7 +362,23 @@ function autopub(){
 
 	<ul  class="" id="menu_list" style="float:none;" >
 	<li>	标题： <input name="title" id="doctitle" value="<%=@doc[:title]%>"></input> </li>
-	<li><a href="javascript:void(0)">导出</a></li>
+<!--	<li><a href="javascript:void(0)">导出</a></li>-->
+<li><a href="javascript:void(0)"  id="tagbt">tags</a>
+	<div id="tags_pad" class="jqmWindow"  style="word-break:break-all;ord-wrap:break-word; white-space:normal;z-index:9999999999;left:600px;top:75px;color:0;width:300px;border:1px solid #eeeeee;background:#ffffff;" >
+	<span class="tag"><a href="javascript:void(0)" onclick="click_tag(this)">aaa</a></span><span class="used_tag"><a href="javascript:void(0)" onclick="click_tag(this)" >aaa</a></span>
+   	<span class="tag"><a href="javascript:void(0)" onclick="click_tag(this)">aaa</a></span><span class="used_tag"><a href="javascript:void(0)" onclick="click_tag(this)" >aaa</a></span>
+   	<span class="tag"><a href="javascript:void(0)" onclick="click_tag(this)">aaa</a></span><span class="used_tag"><a href="javascript:void(0)" onclick="click_tag(this)" >aaa</a></span>
+   	<span class="tag"><a href="javascript:void(0)" onclick="click_tag(this)">aaa</a></span><span class="used_tag"><a href="javascript:void(0)" onclick="click_tag(this)" >aaa</a></span>
+   	<span class="tag"><a href="javascript:void(0)" onclick="click_tag(this)">aaa</a></span><span class="used_tag"><a href="javascript:void(0)" onclick="click_tag(this)" >aaa</a></span>
+   	<span class="tag"><a href="javascript:void(0)" onclick="click_tag(this)">aaa</a></span><span class="used_tag"><a href="javascript:void(0)" onclick="click_tag(this)" >aaaaaaaaaaaaaaaaaaa</a></span>
+   	<span class="tag"><a href="javascript:void(0)" onclick="click_tag(this)">aaa</a></span><span class="used_tag"><a href="javascript:void(0)" onclick="click_tag(this)" >aaaaaaaaaaaaaaaaaaa</a></span>
+   	<span class="tag"><a href="javascript:void(0)" onclick="click_tag(this)">aaa</a></span><span class="used_tag"><a href="javascript:void(0)" onclick="click_tag(this)" >aaaaaaaaaaaaaaaaaaa</a></span>
+   	<span class="tag"><a href="javascript:void(0)" onclick="click_tag(this)">aaa</a></span><span class="used_tag"><a href="javascript:void(0)" onclick="click_tag(this)" >aaaaaaaaaaaaaaaaaaa</a></span>
+	<% if @doc %>
+	
+	<% end %>
+	</div>
+</li>
 	<li><a href="javascript:void(0)" >发布</a>
 		<ul style="width:250px;">
 		<li><a href="javascript:void(0)" onclick="autopub();" >自动发布</a><br></li>
@@ -369,6 +411,9 @@ $('#publish').jqm();
 $('#publish').jqDrag('.jqDrag', null);
 $('#menu_list').simplemenu();
 $('#MetaWebLogPub').jqm();
+$('#tags_pad').jqm({overlay:0, modal:false});
+$("#tagbt").mouseover(showtag);
+$("#tags_pad").mouseleave(hidetags);
 </script>
 <% else %>
 <%#=render :template=>"editor/list", :layout=>false %>
