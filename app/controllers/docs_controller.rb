@@ -22,7 +22,7 @@ class DocsController < ApplicationController
       format.xml  { render :xml => @doc }
     end
 =end
-	#render :layout=>"index"
+	render :layout=>"docs.html.erb"
   end
 
   # GET /docs/new
