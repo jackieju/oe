@@ -124,6 +124,8 @@ function toggleAutoSave(){
 
 var fsMode = 0;
 function fullScreen(){
+   // a = $("#app_frame").data("a");
+	//if (a == undefined) { a = 0;};
 	if (fsMode == 1){
 			$('#left').css('display', 'block');
 			$('#right').css('display', 'block');
@@ -138,9 +140,12 @@ function fullScreen(){
 		$('#right').css('display', 'none');
 		$('#header').css('display', 'none');
 		$('#footer').css('display', 'none');
-		$('#middle').width("1000px");
-		$('#middle').height("570px");
-		$('#middle iframe').height("500px");
+		$('#middle').width("100%");
+		//if (a == 1) {// app_frame is fullscreen
+			//$('#middle').height("410px");
+//		}else{
+			//$('#middle').height("450px");
+	//	}
 		fsMode = 1;
 	}
 	/*$(g_fckeditor.EditorDocument).width("1000");
@@ -355,7 +360,7 @@ function click_tag(t){
 
 <% if @doc %>
 <div id="status" style="text-align:center;font-size:8pt;">
-	<p >Just loaded</p>
+	<p style="margin-top:0px;">Just loaded</p>
 </div>
 <form id="docform">
 	<input type="hidden" id="docid" value="<%=@doc[:id] %> "></input>

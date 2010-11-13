@@ -18,9 +18,13 @@ class Publish < ActiveRecord::Base
 		sg = ""
 		if docid
 	if (publish_target_list && publish_target_list.size>0)
+       doc = Doc.find(docid)
+        type= "文"
+        type = "网摘" if doc[:doctype] == 2
+
          sg ="
        <div style=\"margin-left:68%;backgroud:transparent;\">
-       该文已同时发布到<br>
+       该#{type}已同时发布到<br>
        #{ptl}
        </div>"
        end
@@ -143,6 +147,10 @@ Publish.new({
           return
        end
        
+		doc = Doc.find(docid)
+		type= "文"
+		type = "网摘" if doc[:doctype] == 2
+
        client = MetaWebLogAPI::Client.new(host, path, '11', username, pwd)
        logger.info("host:#{host}, path:#{path}")
       publish_target_list = Publish.find_by_sql("select id,target,permalink from publishes where docid=#{docid} group by target")
@@ -154,14 +162,13 @@ Publish.new({
         ptl += "<a href=\"#{publish_target_list[r][:permalink].to_s}\" >#{publish_target_list[r][:target].to_s} </a><br>"
       end
     end
-      print "====>11="+ptl
        sg = "<br>
        <div class='code' style='background:#ffddcc;text-align:right;'>This article is created by <a href='http://oe.monweb.cn' >开心写作网</a>"
        
        if (publish_target_list && publish_target_list.size>0)
          sg +="
        <div style=\"margin-left:68%;backgroud:transparent;\">
-       该文已同时发布到<br>
+       该#{type}已同时发布到<br>
        #{ptl}
        </div>"
        end
