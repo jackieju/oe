@@ -6,7 +6,7 @@ function activate(e){
 
 function hideMemo(){
 	//h.w.slideUp("slow",function() { if(h.o) h.o.remove(); }); 
-	$("#memopad").fadeOut();
+	$("#apppad").fadeOut();
 	hasMemo=0;
 //	$("#memopad").css("display", "none");
 	
@@ -28,7 +28,7 @@ function showMemo(){
 			}, 
 			success: function(data, textStatus){
 			//	alert( "Data Saved: " + data +","+ textStatus);
-							$("#memopad").css("display", "block");
+							$("#apppad").css("display", "block");
 			    $("#memopad").html(data);
 			hasMemo=1;
 	
@@ -51,7 +51,7 @@ function addNewMemo(){
 			success: function(data, textStatus){
 			//	alert( "Data Saved: " + data +","+ textStatus);
 			//	$("#memopad").css("display", "block");
-			    $("#memopad").append(data);
+			    $("#apppad").append(data);
 			//hasMemo=1;
 	
 			},
