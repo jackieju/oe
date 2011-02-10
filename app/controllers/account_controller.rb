@@ -11,7 +11,9 @@ class AccountController < ApplicationController
   end
 
   def login
+       p "====>method is post?21"
     return unless request.post?
+    p "====>method is post"
 =begin
     self.current_user = User.authenticate(params[:login], params[:password])
     if logged_in?
@@ -37,10 +39,13 @@ class AccountController < ApplicationController
         else
           failed_login("Invalid login or password")
         end
-      end
-       def open_id_authentication(openid_url)
+  end
+  
+
+   def open_id_authentication(openid_url)
         print "\n--->openid_url:  #{openid_url}; #{params['openid.identity']}\n"
-            authenticate_with_open_id openid_url, :required => [:nickname, :email] do |result, identity_url, registration|     
+            authenticate_with_open_id openid_url, {"return_to"=>"http://#{ENV['server_name']}:#{ENV['port']}/account/login?_method=post","realm"=>"http://#{ENV['server_name']}:#{ENV['port']}", :required => [:nickname, :email] } do |result, identity_url, registration|     
+               print "\n--->openid authentication phase2:  #{openid_url}\n"
               print "\n--->openid_url2:  #{openid_url}\n"
               print "\n--->result:#{result.status}\n"
               if result.successful?

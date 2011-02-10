@@ -11,6 +11,7 @@
 <% @userapps.each do |userapp| %>
   <tr>
     <td><%=h userapp.uid %></td>
+	<td><%=h userapp.appname %></td>
     <td><%=h userapp.appkey %></td>
     <td><%=h userapp.permission %></td>
     <td><%=h userapp.style %></td>

@@ -253,7 +253,7 @@ function pub(dest){
 //	$('#iframe_publish').attr("src", "http://www.kaixin001.com/diary/write.php?title=ddd&content=aaaaa");
 //	$('#publish').jqmShow();
 	doctitle = $("#doctitle").val();
-	sg = "<br><div style='background:#ffddff;text-align:right;font-size:10pt;'><font color='#aaaaff'>This article is created by </font><a href='http://oe.monweb.cn' target='_blank' >开心写作网</a></div>";
+	sg = "<br><div style='background:#ffddff;text-align:right;font-size:10pt;'><font color='#aaaaff'>This article is created by </font><a href='http://<%=ENV['server_name']%>' target='_blank' >开心写作网</a></div>";
 //	c = encodeURIComponent(g_fckeditor.GetXHTML(true)+sg);
 //	t = encodeURIComponent(doctitle);
 	c = escape(g_fckeditor.GetXHTML(true)+sg);

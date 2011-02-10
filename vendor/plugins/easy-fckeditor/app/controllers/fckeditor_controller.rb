@@ -195,7 +195,7 @@ class FckeditorController < ActionController::Base
   # Returns the upload url folder with the current folder
   #
   def upload_directory_path
-    url_root = "http://oe.monweb.cn"+ActionController::Base.relative_url_root.to_s
+    url_root = "http://#{ENV['server_name']}"+ActionController::Base.relative_url_root.to_s
     uploaded = url_root + "#{UPLOAD_FOLDER}/#{params[:Type]}"
     "#{uploaded}#{params[:CurrentFolder]}"
   end

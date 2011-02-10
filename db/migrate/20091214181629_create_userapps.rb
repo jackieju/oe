@@ -9,6 +9,7 @@ class CreateUserapps < ActiveRecord::Migration
       t.integer :appkey
       t.integer :permission
       t.integer :style
+	  t.integer :hotkey
 
       t.timestamps
     end
