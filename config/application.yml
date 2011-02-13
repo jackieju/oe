@@ -9,21 +9,11 @@
 # This should only be necessary until the final version of the new profile is released.
 
 development:
-  server_name: oe.ns-soft.com
+  server_name: localhost
   port: 3000
 
 test:
-  api_key: 5758e64d338bee96031f3bdc67962f54
-  secret_key: 1b3edf8005bc0d9229378095b09d8c6f
-  canvas_page_name: leaksmarket
-  callback_url: http://leaksmarket.heroku.com/
-  set_asset_host_to_callback_url: true
-  tunnel:
-    public_host_username: 
-    public_host: 
-    public_port: 4007
-    local_port: 3000
-    server_alive_interval: 0
+
 
 production:
   server_name: oe.ns-soft.com
