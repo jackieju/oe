@@ -101,12 +101,17 @@ module OpenIdAuthentication
     def begin_open_id_authentication(identifier, options = {})
       options[:identifier] = identifier
       value = Rack::OpenID.build_header(options)
+     # p "===>self=#{self}"
+     # p "===>value=#{value}"
       response.headers[Rack::OpenID::AUTHENTICATE_HEADER] = value
       head :unauthorized
     end
 
     def complete_open_id_authentication
+        p "===>Rack::OpenID::RESPONSE=#{Rack::OpenID::RESPONSE}"
+        
       response   = request.env[Rack::OpenID::RESPONSE]
+      p "===>response message: #{response.message.to_s}"
       identifier = response.display_identifier
 
       case response.status

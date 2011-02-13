@@ -18,7 +18,7 @@ function onchangetype(e){
 function add_line(){
 	n = $('#input_clone').clone();
 	n.attr("id", "");
-	$('#blogsetting').append(n);
+	$('#blogsetting_list').append(n);
 //	n.css("display:block");
 	n.fadeIn();
 	n.find("select").change(onchangetype).change();
@@ -31,7 +31,7 @@ function del_line(node){
 }
 
 function get_req(){
-	p = $('#blogsetting');
+	p = $('#blogsetting_list');
 	blog_names = p.find('.blog_name');
 	blog_types = p.find('.blog_type');
 	blog_usernames = p.find('.blog_username');
@@ -162,8 +162,9 @@ function onurlblur(e){
 </script>
 <div style="position:absolute;left:-50px;width:670px;border:0px solid red;margin:0xp;padding:0px;">
 
-	<div id="blogsetting"  style="width:670px;margin:0px;padding:0px;">
+	<div id="blogsetting"  style="width:700px;margin:0px;padding:0px;">
 		<p style="color:#ffeeff;font-size:12pt;">Blog Publish Settings:</p>
+		<div id="blogsetting_list" style="overflow:auto;max-height:390px;_height:390px;">
 		<% if !@list || @list.size==0%>
 		<!--<br><div style="width:300px;">您还没有添加任何设置</div>-->
 		<% else %>
@@ -185,6 +186,7 @@ function onurlblur(e){
 		</div>	
 		<% end %>
 		<% end %>
+		</div><!--id="blogsetting_list"-->
 	</div>
 <a href="javascript:void(0)" onclick="add_line()">Add</a>
 <a href="javascript:void(0)" onclick="save()">Save</a>
