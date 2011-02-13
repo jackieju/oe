@@ -1,4 +1,4 @@
-\require 'net/smtp'
+require 'net/smtp'
 require 'iconv'
 class Publish < ActiveRecord::Base
   
