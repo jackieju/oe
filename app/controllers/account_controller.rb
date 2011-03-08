@@ -11,9 +11,7 @@ class AccountController < ApplicationController
   end
 
   def login
-       p "====>method is post?21"
     return unless request.post?
-    p "====>method is post"
 =begin
     self.current_user = User.authenticate(params[:login], params[:password])
     if logged_in?

@@ -115,6 +115,7 @@ $('#logit').jqmShow();
 
 var g_menu_list1 = 0;
 function showCreateMenu(t){
+	
 	// if (t.nodeName == 'div' || t.nodeName == "DIV")
 	// 	return;
 	
@@ -164,13 +165,13 @@ function hideCreateMenu(){
 			</ul>-->
 
 			<div  onmouseout="hideCreateMenu();" onmouseover="showCreateMenu(this);" style="width:70px;border:0px solid red;">
-			<a href="/editor/create" ><img src="/images/create.gif" style="height:24px;border-width:0px;" />&nbsp;创建</a>
-			<div id="menu_list1" class="jqmWindow jqmMenu" >
-					<ul  style="list-style-image:none;list-style-position:outside;list-style-type:none;width:70px;margin-left:0px;margin-top:0px;border-top:1px solid #aaccee;border-left:1px solid #aaccee;border-right:2px outset #aaccee;border-bottom:2px outset #aaccee;padding:2px;">
-					<li ><a href="/editor/create"  >文档</a><br></li>
-					<li><a href="javascript:void(0);" onclick="logit();">网摘</a><br></li>
-					</ul>
-			</div>
+				<a href="/editor/create" ><img src="/images/create.gif" style="height:24px;border-width:0px;" />&nbsp;创建</a>
+				<div id="menu_list1" class="jqmWindow jqmMenu" style="border:0px solid red;">
+						<ul  style="list-style-image:none;list-style-position:outside;list-style-type:none;width:70px;margin-left:0px;margin-top:0px;border-top:1px solid #aaccee;border-left:1px solid #aaccee;border-right:2px outset #aaccee;border-bottom:2px outset #aaccee;padding:2px;">
+						<li ><a href="/editor/create"  >文档</a><br></li>
+						<li><a href="javascript:void(0);" onclick="logit();">网摘</a><br></li>
+						</ul>
+				</div>
 			</div>
 			<a href="javascript:void(0);" onclick="showDoc(0);"><img src="/images/open.gif" style="height:24px;border-width:0px;" />&nbsp;Open</a><br>
 		<!--	<a href="javascript:void(0);" onclick="showMemo();" title="Ctrl-F11"><img src="/images/coffee.gif" style="height:24px;border-width:0px;" />&nbsp;灵感</a><br>-->
@@ -231,7 +232,8 @@ $('#err_dlg').jqm({});
 $('#dlg').jqm();
 $('#logit').jqm();
 $('#game').jqm({overlay:50,toTop:true});
-$.keydown(function(e){
+
+$().keydown(function f(e){
 	if (e.keyCode==122) {
 		if (hasMemo == 0) 
 			showMemo(); 
@@ -239,6 +241,7 @@ $.keydown(function(e){
 			hideMemo();
 	};
 });
+
 //$('#menu_list1').simplemenu({allowMouseover : true});
 $('#menu_list1').jqm({overlay:0});
 

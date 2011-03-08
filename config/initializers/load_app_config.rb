@@ -10,6 +10,7 @@
       end
       Thread.current[:app_config] = config unless Thread.current[:app_config]
    
-        ENV['server_name']=config['server_name']
+        ENV['server_name']=config['server_name'].to_s
         ENV['port']=config['port'].to_s
     end
+    p "===>server_name=#{ENV['server_name']}"

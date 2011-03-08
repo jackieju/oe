@@ -30,7 +30,7 @@ class Publish < ActiveRecord::Base
        end
 	
 		end
-		footer = "<br><div class='code' style=\"background:#ffddcc;text-align:right;\">This article is created by <a href=\"http://<%=ENV['server_name']%>\" >开心写作网</a>#{sg}</div>"
+		footer = "<br><div class='code' style=\"background:#ffddcc;text-align:right;\">This article is created by <a href=\"http://#{ENV['server_name']}\" >开心写作网</a>#{sg}</div>"
 
         #	msg = "#{message}"
         _sub = Base64.b64encode(subject).gsub("\n","").gsub("\r","")
@@ -81,7 +81,7 @@ Publish.new({
           logger.info("usernmae:#{username};")
           logger.info("password:#{pwd};")
           logger.info("url:/#{username}/services/MetaBlogApi.aspx")
-          sg = "<br><div class='code' style='background:#ffddcc;text-align:right;'>This article is created by <a href='http://<%=ENV['server_name']%>' >开心写作网</a></div>"
+          sg = "<br><div class='code' style='background:#ffddcc;text-align:right;'>This article is created by <a href='http://#{ENV['server_name']}' >开心写作网</a></div>"
           blogpost = {
             'title' => @doc[:title],
             'description' => @doc[:content]+sg,
@@ -163,7 +163,7 @@ Publish.new({
       end
     end
        sg = "<br>
-       <div class='code' style='background:#ffddcc;text-align:right;'>This article is created by <a href='http://<%=ENV['server_name']%>' >开心写作网</a>"
+       <div class='code' style='background:#ffddcc;text-align:right;'>This article is created by <a href='http://#{ENV['server_name']}' >开心写作网</a>"
        
        if (publish_target_list && publish_target_list.size>0)
          sg +="
