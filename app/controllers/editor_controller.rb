@@ -313,7 +313,7 @@ end
 
     end
     
-    
+    # publish by metaweblog api
     def pub_by_mwla
       username = params[:username]
       pwd = params[:pwd]
