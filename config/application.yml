@@ -9,7 +9,7 @@
 # This should only be necessary until the final version of the new profile is released.
 
 development:
-  server_name: localhost
+  server_name: oe
   port: 3000
 
 test:

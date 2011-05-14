@@ -250,6 +250,7 @@ function pub_by_mwla(){
 }
 
 function pub(dest){
+		var docid=$('#docid').val();
 //	$('#iframe_publish').attr("src", "http://www.kaixin001.com/diary/write.php?title=ddd&content=aaaaa");
 //	$('#publish').jqmShow();
 	doctitle = $("#doctitle").val();
@@ -270,6 +271,10 @@ function pub(dest){
 		$('input#p_url').attr('disabled', 'disabled');
 		$('#p_url').val("http://blog.csdn.net/[userid]/services/MetaBlogApi.aspx");
 	}		
+	else if (dest == 'tsina'){
+		window.location.replace("/oauth/index?docid="+docid);
+
+	}
 	else if (dest == 'other_wp'){
 		$('#blog_name').html("其他支持MetaWeblogApi的网站");
 		$('#MetaWebLogPub').jqmShow();
@@ -387,6 +392,7 @@ function click_tag(t){
 	<li><a href="javascript:void(0)" >发布</a>
 		<ul style="width:250px;">
 		<li><a href="javascript:void(0)" onclick="autopub();" >自动发布</a><br></li>
+		<li><a href="javascript:void(0)" onclick="pub('tsina');" >新浪微博</a><br></li>
 		<li onclick="pub_kaixin()" ><a href="javascript:void(0);" onclick="pub('kaixin');">开心网</a><br></li>
 		<li><a href="javascript:void(0)" onclick="pub('sohu')">搜狐博客</a><br></li>
 		<li><a href="javascript:void(0)" onclick="pub('csdn')">CSDN</a><br></li>
