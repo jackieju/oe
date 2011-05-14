@@ -5,7 +5,7 @@ require 'metaweblogapi'
 
 
 class EditorController < ApplicationController
-
+include AuthenticatedSystem
   before_filter :login_required 
 
   def home # show home page

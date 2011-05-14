@@ -1,6 +1,7 @@
 require 'metaweblogapi'
 
 class PublishesController < ApplicationController
+    include AuthenticatedSystem
   # GET /publishes
   # GET /publishes.xml
   

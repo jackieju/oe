@@ -6,8 +6,17 @@ RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
-
+#class Rails::Configuration  
+   #   attr_accessor :action_web_service  
+     # end  
 Rails::Initializer.run do |config|
+    
+  #  config.frameworks += [ :action_web_service]  
+#  config.action_web_service = Rails::OrderedOptions.new  
+#config.load_paths += %W( #{RAILS_ROOT}/app/apis
+                            #{RAILS_ROOT}/vendor/plugins/actionwebservice/lib)  
+                            
+                            
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
@@ -40,9 +49,12 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
   
+ # config.gem 'datanoise-actionwebservice', :lib => 'actionwebservice', :version => '2.2.2' 
 
 end
+require 'action_web_service' 
 
+ 
 #config.gem 'rmmseg'
 require 'rmmseg'
 require 'rmmseg/ferret'

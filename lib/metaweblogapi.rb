@@ -15,6 +15,8 @@ module MetaWebLogAPI
 	end
 	
     def newPost(content, publish)
+      p "===>test xmlrpc:"+@client.call('metaWeblog.test')
+      
       @client.call('metaWeblog.newPost', @blogid, @username,
           @password, content, publish)
     end

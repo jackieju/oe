@@ -3,10 +3,11 @@
 require "openappserver"
 
 class ApplicationController < ActionController::Base
-  include AuthenticatedSystem
+
+ # include AuthenticatedSystem
   include OpenAppServer
   helper :all # include all helpers, all the time
-  protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  #protect_from_forgery # See ActionController::RequestForgeryProtection for details
   
 
   

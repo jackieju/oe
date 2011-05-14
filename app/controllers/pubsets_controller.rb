@@ -1,5 +1,5 @@
 class PubsetsController < ApplicationController
-  
+  include AuthenticatedSystem
   def index
     ui = Userinfo.find_by_sql("select * from userinfos where uid=#{current_user[:id]}")
      @list=[]

@@ -1,5 +1,6 @@
 require 'net/smtp'
 require 'iconv'
+require 'oauth'
 class Publish < ActiveRecord::Base
   
   
@@ -64,7 +65,15 @@ Publish.new({
          }).save!
 
       end
-      
+
+      def pub_to_tsina(current_user, docid)
+           @callback_url = "http://127.0.0.1:3000/oauth/callback_tsina"
+           @consumer = OAuth::Consumer.new("3983375741","de7f642798c4b05d7c2bb143c5d2ad6a", :site => "http://api.t.sina.com.cn/oauth/request_token")
+          @request_token = @consumer.get_request_token(:oauth_callback => @callback_url)
+      #    session[:request_token] = @request_token
+      #    redirect_to @request_token.authorize_url(:oauth_callback => @callback_url)
+          return @request_token
+      end
   def pub_to_csdn(current_user, docid, username, pwd)
          client = MetaWebLogAPI::Client.new('blog.csdn.net', "/#{username}/services/MetaBlogApi.aspx", '1', username, pwd)
           begin
