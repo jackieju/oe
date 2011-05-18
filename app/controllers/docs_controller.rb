@@ -1,4 +1,5 @@
 class DocsController < ApplicationController
+    include AuthenticatedSystem
 	before_filter :login_required
   # GET /docs
   # GET /docs.xml
