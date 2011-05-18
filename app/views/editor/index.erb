@@ -332,7 +332,7 @@ function click_tag(t){
 </div>
 <div id="share" class="jqmWindow" style="width:500px;" >
 <% if @doc %>
-	You can share this document with url <input id="shareUrl" size="30" value="http://oe.monweb.cn/docs/<%=@doc[:id]%>" ></input><button style="display:none" id="btCopy" onclick="$.copy($('#shareUrl').val());" label="copy" value="copy" >copy</button>
+	You can share this document with url <input id="shareUrl" size="30" value="http://#{ENV['server_name']}/docs/<%=@doc[:id]%>" ></input><button style="display:none" id="btCopy" onclick="$.copy($('#shareUrl').val());" label="copy" value="copy" >copy</button>
 <% end %>
 </div>
 <div id="email" class="jqmWindow" style="width:500px;" >
