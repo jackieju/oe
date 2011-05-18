@@ -5,8 +5,8 @@ class OauthController < ApplicationController
              p "index !!\n"
        # Publish.pub_to_csdn(current_user, 0, "fdsf","")
      #   @request_token = Publish.pub_to_tsina(current_user, 0)
-             # @callback_url = "http://#{ENV['server_name']}:#{ENV['port']}/oauth/callback_tsina?docid=#{params[:docid]}"
-            @callback_url = "http://oe:3000/oauth/callback_tsina?docid=#{params[:docid]}"
+              @callback_url = "http://#{ENV['server_name']}:#{ENV['port']}/oauth/callback_tsina?docid=#{params[:docid]}"
+            #@callback_url = "http://oe:3000/oauth/callback_tsina?docid=#{params[:docid]}"
                #@callback_url = "http://www.google.com"
            @consumer = OAuth::Consumer.new("3983375741","de7f642798c4b05d7c2bb143c5d2ad6a", :site => "http://api.t.sina.com.cn")
           @request_token = @consumer.get_request_token(:oauth_callback => @callback_url)
