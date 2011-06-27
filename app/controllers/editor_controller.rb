@@ -203,12 +203,12 @@ end
     end
 
 	def getTitle( content)
-	 title_re = /<title>(.*)?<\/title>/mi
+	 title_re = /<title>(.*?)<\/title>/mi
 
       m = title_re.match(content)
       print "\n---------->title:#{m}"
       if (m)
-        title = m[1].gsub(/[\/|\\*\(\)?\[\];:'\",\.]/,"").gsub(/^[\s]+/, "").gsub(/[\s]+$/, "")
+        title = m[1].gsub(/[\/|\\*\(\)?\[\];:'\",\.]/,"").gsub(/^[\s]+/, "").gsub(/[\s]+$/, "").gsub(/<!--(.*)-->/, "")
       else
         title = ""
       end
@@ -384,6 +384,12 @@ end
     def error
       @err_msg = params[:err_msg]
       render :layout=>"index"
+    end
+    
+    #rebuild ferret_index
+    def rebuild_ferret
+        Doc.rebuild_index
+        render :text=> "rebuild ferrect succesfully"
     end
 
   end
