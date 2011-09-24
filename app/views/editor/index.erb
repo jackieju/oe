@@ -6,7 +6,7 @@
 <%= stylesheet_link_tag 'jquery.autocomplete' %>
 <script src="/javascripts/jquery.autocomplete.js"></script>
 <script src="/javascripts/jquery.copy.js"></script>
-
+<script src="/javascripts/util.js"></script>
 
 
 <script>
@@ -122,8 +122,10 @@ function toggleAutoSave(){
 	}
 }
 
+
 var fsMode = 0;
 function fullScreen(){
+//	alert("full screen");
    // a = $("#app_frame").data("a");
 	//if (a == undefined) { a = 0;};
 	if (fsMode == 1){
@@ -131,9 +133,10 @@ function fullScreen(){
 			$('#right').css('display', 'block');
 			$('#header').css('display', 'block');
 			$('#footer').css('display', 'block');
-			$('#middle').width("700px");
-			$('#middle').height("470px");
-			$('#middle iframe').height("390px");
+			$('#middle').width("700px")
+		$('#docform iframe').height("390px");
+		//	$('#middle iframe').height("390px");
+		$('#middle').height("500px");
 			fsMode = 0;
 	}else{
 		$('#left').css('display', 'none');
@@ -141,6 +144,15 @@ function fullScreen(){
 		$('#header').css('display', 'none');
 		$('#footer').css('display', 'none');
 		$('#middle').width("100%");
+		
+		//	alert("set height");
+		$('#middle').height("auto");
+		//alert( inspect(	window.parent.document.getElementById('appframe') )	);
+		h = window.parent.document.getElementById('appframe').scrollHeight-100;
+	//	alert(h);
+	//	$('#middle').height(h+"px");
+		$('#docform iframe').height(h+"px");
+
 		//if (a == 1) {// app_frame is fullscreen
 			//$('#middle').height("410px");
 //		}else{

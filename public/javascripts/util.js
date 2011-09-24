@@ -92,3 +92,22 @@ function autoPos(a, b){
 //	alert(c_w+","+c_h);
 }
 
+function inspect(obj) {
+
+     var props = "";
+
+     for(var p in obj){
+
+         if(typeof(obj[p])=="function"){
+          // obj[p]();
+			props += "function "+p+"()\n";
+         }else{
+           props+= p + "=" + obj[p] + "\n";
+         }
+     }
+
+    // alert(props);
+	return props;
+ }
+
+
