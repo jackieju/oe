@@ -124,6 +124,7 @@ Publish.new({
   end
   
   def pub_by_mwl(current_user, docid, username, pwd, url)
+  
      if !url
        url = ""
      else
@@ -139,7 +140,7 @@ Publish.new({
       raise "文章不存在"
        return
      end
-
+   
        permalink = ''
        logger.info("url:#{url}")
        match_result = url.match("^http://(.*?)/(.*)")
@@ -189,31 +190,71 @@ Publish.new({
          'description' => @doc[:content]+sg,
          'pubDate' => Time.now
        }
-       begin
-         rsp = client.newPost(blogpost, true)
-         logger.debug "===>postid:#{rsp}"
-          rsp = client.getPost(rsp);
-            logger.debug "===>getPost:#{rsp}"
-            permalink = rsp['permaLink']
-            if (!permalink || permalink.size==0)
-               permalink = rsp['permalink']
-            end
-            logger.debug "===>permalink:#{permalink}"
-       rescue Exception=>e
-         trace = e.backtrace.join("\n")
-         logger.error ("#{e}, #{e.message}, #{trace}")
-         #render :text=>"<script>showErrDlg('#{e}, #{e.message}, #{trace}')</script>"
-         raise "#{e}, #{e.message}, #{trace}"
-      #render :text=>"error"
-         return
+       postid = ""
+       # try to get post id from pubish history
+       postids = Publish.find_by_sql("select postid from publishes where docid=#{docid} and uid='#{current_user[:id]}' order by updated_at desc limit 10")
+      # p "===>select postid from publishes where docid=#{docid} and uid='#{current_user[:id]}'"
+       p "\n===>postids=#{postids}\n"
+       if (postids)
+           for pid in postids
+               if (pid != "" && pid[:postid]!="")
+                   postid=pid[:postid]
+                   p "#{pid[:postid]}"
+                   break
+                end
+           end
        end
+       
+       if (postid == "") # new post
+           begin
+             rsp = client.newPost(blogpost, true)
+                  postid = rsp.to_s
+             logger.debug "===>postid:#{rsp}"
+              rsp = client.getPost(rsp);
+                logger.debug "===>getPost:#{rsp}"
+                permalink = rsp['permaLink']
+                if (!permalink || permalink.size==0)
+                   permalink = rsp['permalink']
+                end
+                logger.debug "===>permalink:#{permalink}"
+            
+           rescue Exception=>e
+             trace = e.backtrace.join("\n")
+             logger.error ("#{e}, #{e.message}, #{trace}")
+             #render :text=>"<script>showErrDlg('#{e}, #{e.message}, #{trace}')</script>"
+             raise "#{e}, #{e.message}, #{trace}"
+          #render :text=>"error"
+             return
+           end
+       else  # upate existing post
+           begin 
+               p "===>post id: #{postid}"
+               rsp = client.editPost(postid, blogpost, true)
+                logger.debug "===>editpost return:#{rsp}"
+                rsp = client.getPost(postid);
+                logger.debug "===>getPost:#{postid}"
+                permalink = rsp['permaLink']
+                if (!permalink || permalink.size==0)
+                   permalink = rsp['permalink']
+                end
+                logger.debug "===>permalink:#{permalink}"
+           rescue Exception=>e
+             trace = e.backtrace.join("\n")
+             logger.error ("#{e}, #{e.message}, #{trace}")
+             raise "#{e}, #{e.message}, #{trace}"
+             return
+           end  
+       end # if (postid == "")
+         
+   
         Publish.new({
            :uid=>current_user[:id],
            :username=>current_user.login,
            :docid=>docid,
            :target=>host,
            :doctitle=>@doc[:title],
-           :permalink=>permalink
+           :permalink=>permalink,
+           :postid =>postid 
          }).save!
 
        #render :text=>"日志发布成功"
