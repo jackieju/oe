@@ -325,13 +325,21 @@ end
       end
       dest = params[:dest]
       docid = params[:docid]
-      
+      r = -1
       begin 
-        Publish.pub_by_mwl(current_user, docid, username, pwd, url)
+        r = Publish.pub_by_mwl(current_user, docid, username, pwd, url)
       rescue Exception=>e
         render :text=>"<script>showErrDlg('#{e.message}')</script>"
       end
-      render :text=>"日志发布成功"
+      
+      if r < 0
+          render :text=>"Publish failed"
+      elsif r == 0
+          render :text=>"日志发布成功"
+      elsif r == 1
+          render :text=>"Update blog succeeded."
+      end
+      
     end
     
     def email_doc

@@ -204,8 +204,9 @@ Publish.new({
                 end
            end
        end
-       
+       type =  -1
        if (postid == "") # new post
+           type =0
            begin
              rsp = client.newPost(blogpost, true)
                   postid = rsp.to_s
@@ -227,6 +228,7 @@ Publish.new({
              return
            end
        else  # upate existing post
+           type = 1
            begin 
                p "===>post id: #{postid}"
                rsp = client.editPost(postid, blogpost, true)
@@ -258,7 +260,7 @@ Publish.new({
          }).save!
 
        #render :text=>"日志发布成功"
-       return 
+       return type
   end
   
   def email_doc(current_user, docid, from, to)
