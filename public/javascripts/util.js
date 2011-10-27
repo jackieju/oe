@@ -94,6 +94,7 @@ function autoPos(a, b){
 
 function inspect(obj) {
 
+	
      var props = "";
 
      for(var p in obj){
@@ -107,7 +108,7 @@ function inspect(obj) {
      }
 
     // alert(props);
-	return props;
+	return obj+":\n"+props;
  }
 
 

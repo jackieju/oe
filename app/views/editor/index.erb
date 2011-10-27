@@ -121,6 +121,38 @@ function toggleAutoSave(){
 		$('#status p').html("AutoSave enabled");
 	}
 }
+var h_NightMode = 0;
+function toggleNightMode(){
+	if (h_NightMode == 1){
+		$("body").css("background", "#ffffff");
+		$("#toggle_nightmode").css({
+			"background": "#ffffff",
+			"border-width": "1px",
+			"border-style": "outset",
+			"border-color": "#0088bb"
+		});
+		$('#status p').html("NightMode disabled");
+		h_NightMode = 0;
+	}else{
+		// enter night mode
+//	alert( inspect(	$($("#docform iframe").get(0).contentWindow.document.body)));
+	t = $("#docform iframe").get(0).contentWindow.document;
+	t1 = $(t).find("iframe").get(0);
+//	alert(inspect(t1));
+	b = $(t1.contentWindow.document.body);
+	b.css("background", "#000000");
+	b.css("color", "#999999");
+		$("body").css("background", "#000000");
+		$("#toggle_nightmode").css({
+			"background": "#ccddcc",
+			"border-width": "1px",
+			"border-style": "inset",
+			"border-color": "#0088bb"
+		});
+		$('#status p').html("NightMode enabled");
+		h_NightMode = 1;
+	}
+}
 
 
 var fsMode = 0;
@@ -140,7 +172,7 @@ function fullScreen(){
 		//	$('#middle iframe').height("390px");
 		$('#middle').height("500px");
 
-				// $('#middle').css("margin-left", "0px");
+				 $('#middle').css("margin-left", "0px");
 			fsMode = 0;
 	}else{
 		// enter full screen mode
@@ -148,9 +180,15 @@ function fullScreen(){
 		$('#right').css('display', 'none');
 		$('#header').css('display', 'none');
 		$('#footer').css('display', 'none');
-		w = window.parent.document.getElementById('appframe').scrollWidth-5;
-			$('#middle').width(w+"px");
-	//	$('#middle').css("margin-left", "10px");
+		w = window.parent.document.getElementById('appframe').scrollWidth;
+		if (w > 1024){
+			$('#middle').width(w*66/100+"px");
+			$('#middle').css("margin-left", w*16/100+"px");
+		}
+		else{
+				$('#middle').width(w-5+"px");
+				$('#middle').css("margin-left", "5");
+		}
 		//	alert("set height");
 		$('#middle').height("auto");
 		//alert( inspect(	window.parent.document.getElementById('appframe') )	);
@@ -428,6 +466,8 @@ function click_tag(t){
 			<% end %>
 			)"> <img src="/images/delete.gif" style="border-width:0px;width:12px;"/></a></li>
 	<li><a href="javascript:void(0)" id="toggle_autosave" title="自动保存" onclick="toggleAutoSave();" style="padding:2px;font-size:8pt;color:#000;" onmouseover="if (!h_autoSave) $(this).css('border-style', 'inset');" onmouseout="if (!h_autoSave) $(this).css('border-style', 'outset');">AutoSave</a></li>
+	<li><a href="javascript:void(0)" id="toggle_nightmode" title="Night Mode" onclick="toggleNightMode();" style="padding:2px;font-size:8pt;color:#000;" onmouseover="if (!h_NightMode) $(this).css('border-style', 'inset');" onmouseout="if (!h_NightMode) $(this).css('border-style', 'outset');">Night Mode</a></li>
+
 	<li><a href="javascript:void(0)" title="Share" onclick="shareDoc();">Share</a></li>
 	</ul>
 
