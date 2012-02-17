@@ -192,7 +192,7 @@ Publish.new({
        }
        postid = ""
        # try to get post id from pubish history
-       postids = Publish.find_by_sql("select postid from publishes where docid=#{docid} and uid='#{current_user[:id]}' order by updated_at desc limit 10")
+       postids = Publish.find_by_sql("select postid from publishes where docid=#{docid} and uid='#{current_user[:id]}' and target='#{host}'order by updated_at desc limit 10")
       # p "===>select postid from publishes where docid=#{docid} and uid='#{current_user[:id]}'"
        p "\n===>postids=#{postids}\n"
        if (postids)
