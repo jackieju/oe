@@ -237,7 +237,9 @@ end
       if uri.path  and uri.path.length > 0
           path = uri.path
      end
-      resp, d = http.post("/", "", headers)
+     p "===>path=#{path}"
+=begin
+      resp, d = http.get(path, uri.query, headers)
 #      p "---->resp.inspect=#{resp.response['set-cookie']}"
  #     p "---->resp.req=#{uri.host}\n#{uri.port}\n#{uri.path}\n#{uri.query}\n#{headers.inspect}"
       if (resp.response['set-cookie'])
@@ -250,14 +252,15 @@ end
             if (limit<=0) 
               return resp 
             else 
-              getPage(resp['location'], limit-1, cookie1, nil)
+              getPage(resp['location'], limit-1, cookie1, url)
             end
       end
       return resp
-=begin      
-      p "==>#{uri.host}"
+=end
+      
+      p "==>33#{url}"
       res = Net::HTTP.get_response(URI.parse(url))
-      cookie1 = res['set-cookie'].split('; ')[0]
+   #   cookie1 = res['set-cookie'].split('; ')[0]
       p "--->cookie=#{cookie.inspect}"
       #print "------->body:"+res.body+"\n"
       print "--------------------------------->locate:#{res['location']}\n";
@@ -269,16 +272,17 @@ end
             if (limit<=0) 
               return res 
             else 
-              getPage(res['location'], limit-1, cookie1)
+              getPage(res['location'], limit-1, cookie1, url)
             end
       end
       
       return res
-=end
+
     end
     
     def logit
       url = params[:url]
+      url.strip!
       if not (url =~ /http\:\/\//i)
           url = "http://"+url
       end
@@ -357,7 +361,7 @@ end
      # add host before "/"
      content = content.gsub(/(<img.*?src=[\"\'])\//){|m| "#{$1}#{uri[0]}:\/\/#{uri[2]}\/"}
      # add context path if no "/"
-     #content = content.gsub(/(<img.*?src=[\"\'])([^\/(http:\/\/)])/){|m| "#{$1}#{context}#{$2}"}
+     content = content.gsub(/(<img.*?src=[\"\'])([^\/(http:\/\/)])/){|m| "#{$1}#{context}#{$2}"}
      #  print "\n---------->content:#{content}"
      
   
@@ -383,7 +387,7 @@ end
      p "==>2"+$2
      c = $2
      begin
-         fimg=download_img(uri, docid, $2, img_index)
+         fimg=download_img(_uri, docid, $2, img_index)
           img_index = img_index+1
           c = "http://#{ENV['server_name']}:#{ENV['port']}/imgdb/#{docid}/#{fimg}"
 
@@ -394,12 +398,11 @@ end
     }
   
     # download img for background
-    content = content.gsub( /(body)(.*?{.*?background:.*?url\()(.*?)(\))/i){|m|
-    
+    content = content.gsub(/(body)(.*?{.*?background:.*?url\()(.*?)(\))/i){|m|
      p "==>22"+$3
      c = $3
      begin
-         fimg=download_img(uri, docid, $3, img_index)
+         fimg=download_img(_uri, docid, $3, img_index)
         img_index = img_index+1
         c = "http://#{ENV['server_name']}:#{ENV['port']}/imgdb/#{docid}/#{fimg}"
     rescue Exception=>e
@@ -416,18 +419,27 @@ end
     end
     
     def download_img(uri, docid, url, index)
+       
         if not (url=~/http\:\/\//i)
-            url = "#{uri.scheme}://#{uri.host}:#{uri.port}#{uri.path}#{uri.query}"
+            if url =~/~\//i
+                 url = "#{uri.scheme}://#{uri.host}:#{uri.port}#{url}"
+            else
+                 url = "#{uri.scheme}://#{uri.host}:#{uri.port}#{uri.path}/#{url}"
+            end
         end
         url =   URI.escape(url)
            target_uri = URI.parse(url)
-           p "==>downloading #{target_uri.host},#{target_uri.path}#{target_uri.query}"
+           p "==>downloading #{target_uri.host},#{target_uri.path},#{target_uri.query}"
            Net::HTTP.start(target_uri.host) { |http|
-    
-         resp = http.get(URI.escape("#{target_uri.path}#{target_uri.query}"))
-
+        if (target_uri.query and target_uri.query.length>0)
+            resp = http.get("#{target_uri.path}?#{target_uri.query}")
+        else
+            resp = http.get("#{target_uri.path}")
+        end
+        
+ 
          resp['Content-Type']=~ /image\/(.*)$/i
-         p "===> download img #{url} to #{index}.#{$1}, content-type=#{resp['Content-Type']}" 
+         p "===> downloaded img #{url} to #{index}.#{$1}, content-type=#{resp['Content-Type']}" 
          open("public/imgdb/#{docid}/#{index}.#{$1}", "wb") { |file|
              file.write(resp.body)
          }
