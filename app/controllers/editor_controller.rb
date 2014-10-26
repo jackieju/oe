@@ -357,7 +357,7 @@ end
       # remove js from content
      content = content.gsub(/<script(.*?)<\/script>/mi, "")
    
-     # fix img (add host if img/src doesn't have)
+     # fix img (add host if img/src doesn't have, to make it easy for downloading afterwards)
      # add host before "/"
      content = content.gsub(/(<img.*?src=[\"\'])\//){|m| "#{$1}#{uri[0]}:\/\/#{uri[2]}\/"}
      # add context path if no "/"
@@ -365,7 +365,7 @@ end
      #  print "\n---------->content:#{content}"
      
   
-     
+      # add one link to original page
       content = "<p style=\"background:\#ccccff\"><a href='#{params[:url]}' >#{params[:url]}</a></p>#{content}";
       doc = Doc.new({
       :uid=>current_user[:id],

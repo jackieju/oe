@@ -101,9 +101,9 @@ ActiveRecord::Schema.define(:version => 20111027175713) do
     t.integer  "appkey"
     t.integer  "permission"
     t.integer  "style"
+    t.integer  "hotkey"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "hotkey"
   end
 
   create_table "userinfos", :force => true do |t|
