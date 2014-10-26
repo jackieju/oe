@@ -3,4 +3,4 @@ log_file: log/mongrel.log
 port: "6010"
 environment: production
 pid_file: tmp/pids/mongrel_oe.pid
-servers: 3
+servers: 1 

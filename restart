@@ -1,1 +1,2 @@
+rm tmp/pids/mongrel_oe.6010.pid
 mongrel_rails cluster::restart
