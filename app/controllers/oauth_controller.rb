@@ -25,8 +25,12 @@ class OauthController < ApplicationController
             t = t[0..99]
         end
 
-        content = "#{t} http://oe.ns-soft.com/docs/#{params[:docid]}"  
-       # content = "#{t}"  
+        # post doc title with a link to blog content
+        #content = "#{t} http://oe.ns-soft.com/docs/#{params[:docid]}" 
+        day = Time.now() 
+        sday = day.strftime("%Y/%m/%d")
+        s_title = t.gsub(" ", "-")
+        content = "#{t} http://jackiejuju.wordpress.com/#{sday}/#{s_title}/"  
            p "===>content=#{content}"
      #    @request_token = session[:request_token] 
         @consumer = OAuth::Consumer.new("3983375741","de7f642798c4b05d7c2bb143c5d2ad6a", :site => "http://api.t.sina.com.cn")

@@ -1,0 +1,2 @@
+module MetaweblogapiHelper
+end

@@ -1,3 +1,5 @@
+=== START ===
+
 start ferret full text search engine
 >ferret_server.sh start
 or
@@ -9,6 +11,27 @@ or
 mongrel_rails cluster::restart
 
 
-INSTALL
+=== INSTALL ===
+ruby 1.8.7
 sudo gem install oauth
+gem install ruby-openid
+gem install rack-openid -v 1.0.1
 
+#install datanoise-actionwebservice
+gem install datanoise-actionwebservice -V -v 2.3.2
+#or
+cd ../actionwebservice2.3.2
+ruby install.rb
+
+#install rmmseg 0.1.6
+gem install rmmseg -V
+# or
+wget https://rubygems.org/downloads/rmmseg-0.1.6.gem
+gem install --local rmmseg-0.1.6.gem
+
+gem install -V stringex -v 1.1.0
+or
+gem install --local stringex-1.1.0.gem
+
+rake db:create
+rake db:migrate

@@ -154,7 +154,7 @@ function openapp(id, style, appurl,scroll)
 
 function maxsize_appframe(scroll){
 	$("#app_frame").width(window.screen.width-20);
-	$("#app_frame").css("height", "500px");
+	$("#app_frame").css("height", window.screen.height);
 	$("#app_frame").attr("z-index", 100);
 	// $("#app_frame").css("border", "1px solid green");
 	$("#app_frame").css("position", "absolute");
@@ -187,7 +187,9 @@ function fs() // full screen app or restore
 	a = $("#app_frame").data("a");
 	if (a == undefined || a!= 1){
 	$("#app_frame").width(window.screen.width-20);
-	$("#app_frame").css("height", "500px");
+	//alert(window.screen.availHeight);
+	$("#app_frame").css("height", window.screen.availHeight-100);
+	$("#appframe").css("height", window.screen.availHeight-100);
 	$("#app_frame").attr("z-index", 100);
 	// $("#app_frame").css("border", "1px solid green");
 	$("#app_frame").css("position", "absolute");
@@ -200,7 +202,7 @@ function fs() // full screen app or restore
 		$("#app_frame").width("850px");
 	$("#app_frame").css("height", "500px");
 	$("#app_frame").attr("z-index", 10);
-	
+		$("#appframe").css("height", "500px");
 	$("#app_frame").css("position", "relative");
 	$("#app_frame").css("left", "0");
 	$("#app_frame").css("top", "0");

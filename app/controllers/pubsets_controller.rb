@@ -60,12 +60,17 @@ class PubsetsController < ApplicationController
         next
       end
       begin
-        msg = msg + "\n向#{blog['blog_name']}发布日志\n"
+        msg = msg + "\n向#{blog['blog_name']}发布日志:\n"
         logger.debug "--->#{blog['blog_type']}"
         if (blog['blog_type'] == "email")
           Publish.email_doc(current_user, docid, blog['blog_emailf'], blog['blog_emailt'])
         elsif (blog['blog_type'] == "metaweblog")
-          Publish.pub_by_mwl(current_user, docid, blog['blog_username'], blog['blog_pwd'], blog['blog_url'])
+          rc =Publish.pub_by_mwl(current_user, docid, blog['blog_username'], blog['blog_pwd'], blog['blog_url'])
+          if rc == 0
+              msg=msg+"创建新日志"
+          elsif rc ==1
+            msg = msg + "更新日志"
+            end
         else
           raise "unkown blog type"
         end
