@@ -4,4 +4,8 @@ p "===> config file #{File.expand_path(File.dirname(__FILE__) + "/../config/envi
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 
 
-Doc.rebuild_index
+# Doc.rebuild_index
+
+Doc.all.each{|r|
+    r.ferret_update
+}
