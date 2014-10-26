@@ -1,3 +1,4 @@
+require "actionwebservice"
 class MetaWeblogServiceAPI< ActionWebService::API::Base
 inflect_names false  
   api_method :newPost, :expects => [:string], :returns => [:int]  

@@ -22,6 +22,7 @@ gem install datanoise-actionwebservice -V -v 2.3.2
 #or
 cd ../actionwebservice2.3.2
 ruby install.rb
+(for rails 2.3.5, you need install datanoise-actionwebservice 2.3.5, althought it will fail, but it doesn't matter)
 
 #install rmmseg 0.1.6
 gem install rmmseg -V
