@@ -8,7 +8,21 @@ class ApplicationController < ActionController::Base
   include OpenAppServer
   helper :all # include all helpers, all the time
   #protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  
+  def error(msg, data=nil)
+       ret = {
+          "error"=>msg
+      }
+      ret = ret.merge(data) if data
+      render :text=>ret.to_json
+      # render :text=>"{\"error\":\"#{msg}\"}"
+  end
+  def success(msg="OK", data=nil)
+      ret = {
+          "OK"=>msg
+      }
+      ret = ret.merge(data) if data
+      render :text=>ret.to_json
+  end
 
   
   # Scrub sensitive parameters from your log

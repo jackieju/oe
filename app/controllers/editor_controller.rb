@@ -104,9 +104,11 @@ logger.info("+title:#{search}+uid:#{current_user[:id]}")
         aFile.close
       rescue Exception=>e
         logger.error e
+        return false
       end
 
       doc.save!()
+      return true
     end
     
     def save
@@ -123,8 +125,11 @@ logger.info("+title:#{search}+uid:#{current_user[:id]}")
       doc[:title] = title.gsub("\n","").gsub("\r","");
       doc[:content] = content;
 
-    save_doc(doc)
-
+      if save_doc(doc)
+          success()
+      else
+          error("Save doc failed")
+      end
  
 
 =begin
